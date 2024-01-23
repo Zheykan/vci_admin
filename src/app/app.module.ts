@@ -14,6 +14,7 @@ import { DashboardComponent } from './modulos/dashboard/dashboard.component';
 import { LoginComponent } from './modulos/login/login.component';
 import { RegisterComponent } from './modulos/register/register.component';
 import { ForgotPasswordComponent } from './modulos/forgot-password/forgot-password.component';
+import { ErrorNotFoundComponent } from './modulos/error-not-found/error-not-found.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import { ForgotPasswordComponent } from './modulos/forgot-password/forgot-passwo
     DashboardComponent,
     LoginComponent,
     RegisterComponent,
-    ForgotPasswordComponent
+    ForgotPasswordComponent,
+    ErrorNotFoundComponent
   ],
   imports: [
     BrowserModule,

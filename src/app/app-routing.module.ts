@@ -6,6 +6,7 @@ import { PrincipalComponent } from './modulos/principal.component';
 import { DashboardComponent } from './modulos/dashboard/dashboard.component';
 import { RegisterComponent } from './modulos/register/register.component';
 import { ForgotPasswordComponent } from './modulos/forgot-password/forgot-password.component';
+import { ErrorNotFoundComponent } from './modulos/error-not-found/error-not-found.component';
 
 const routes: Routes = [
   {
@@ -23,6 +24,9 @@ const routes: Routes = [
   },
   {
     path: 'forgot-password', component: ForgotPasswordComponent
+  },
+  {
+    path:'**', component: ErrorNotFoundComponent
   },
 
 ];
