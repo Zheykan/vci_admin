@@ -6,6 +6,24 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
 
+### How to start
+
+**Note** that this seed project requires **node >=v12.0.0 and npm >=6**.
+
+In order to start the project use:
+
+```bash
+$ git clone https://github.com/Zheykan/vci_admin.git
+$ cd vci_admin
+# install the project's dependencies
+$ npm install
+$ npm start
+# watches your files and uses livereload by default run `npm start` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+# prod build, will output the production application in `dist`
+# the produced code can be deployed (rsynced) to a remote server
+$ npm run build
+```
+
 ## Code scaffolding
 
 Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
