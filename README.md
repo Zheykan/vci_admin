@@ -8,7 +8,9 @@ Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The appli
 
 ### How to start
 
-**Note** that this seed project requires **node >=v12.0.0 and npm >=6**.
+**Notes:** 
+- That this seed project requires **node >=v12.0.0 and npm >=6**.
+- Require download the proyect backend from the repository `https://github.com/Zheykan/Backend-VCI_Admin.git` (Backend-VCI_Admin).
 
 In order to start the project use:
 
