@@ -1,0 +1,508 @@
+<div class="container-fluid bg-gradient-third-section p-4">
+    <!-- Page Heading -->
+    <h1 class="pt-4">Inventario</h1>
+    <ol class="breadcrumb mb-4">
+        <li class="breadcrumb-item active">Gestiona el inventario y nuevos productos.</li>
+    </ol>
+    <!-- Contenido Graficos, similares y extras-->
+    <div class="row">
+        <div class="col-xl-8">
+            <div class="card mb-4">
+                <div class="card-header">
+                    <i class="fas fa-chart-area me-1"></i>
+                    Estadisticas
+                </div>
+                <div class="card-body"><canvas id="myAreaChart" width="100%" height="40"></canvas></div>
+            </div>
+        </div>
+        <div class="col-xl-4">
+            <div class="card mb-4">
+                <div class="card-header">
+                    <i class="me-1">
+                        <svg xmlns="http://www.w3.org/2000/svg" height="14" width="14" viewBox="0 0 512 512">
+                            <path d="M64 256V160H224v96H64zm0 64H224v96H64V320zm224 96V320H448v96H288zM448 256H288V160H448v96zM64 32C28.7 32 0 60.7 0 96V416c0 35.3 28.7 64 64 64H448c35.3 0 64-28.7 64-64V96c0-35.3-28.7-64-64-64H64z"/>
+                        </svg>
+                    </i>
+                    Adicionales
+                </div>
+                <div class="card-body">
+                    <div class="form-group row align-self-center align-items-top">
+                        <div class="col-sm-6 mb-3 mb-sm-0" *ngIf="rol == 'Gestor de Bodega' || FO_rol == 3 || FO_rol == 4">
+                            <a class="btn btn-primary-alt btn-user btn-block" (click)="mostrar_u('mostrar')" (click)="mostrar_m('ocultar')">
+                                <i class="me-1">
+                                    <svg xmlns="http://www.w3.org/2000/svg" height="15" width="15" viewBox="0 0 448 512">
+                                        <path d="M256 80c0-17.7-14.3-32-32-32s-32 14.3-32 32V224H48c-17.7 0-32 14.3-32 32s14.3 32 32 32H192V432c0 17.7 14.3 32 32 32s32-14.3 32-32V288H400c17.7 0 32-14.3 32-32s-14.3-32-32-32H256V80z"/></svg>
+                                </i>
+                                Nueva Unidad
+                            </a>
+                            <div class="row" *ngIf="most_u == true">
+                                <div class="col-sm-12 my-3 mb-sm-0 d-inline-flex align-items-center">
+                                    <label for="new_unidad">Símbolo de Unidad:</label>
+                                    <input type="text" class="ms-1 form-control form-control-user" id="new_unidad"
+                                        placeholder="Lt, tallas de ropa, cajas..." maxlength="20" [(ngModel)]="obj_unidad.nombre">
+                                    <span class="span-alert" *ngIf="validate_u_name == false">Inserte una unidad.</span>
+                                </div>
+                                <div class="col-sm-12 mt-3 mb-sm-0 d-inline-flex">
+                                    <a class="mx-1 btn btn-primary-alt btn-user btn-block" (click)="validar_info_u()">
+                                        <i class="me-1">
+                                            <svg xmlns="http://www.w3.org/2000/svg" height="15" width="15" viewBox="0 0 448 512">
+                                                <path d="M256 80c0-17.7-14.3-32-32-32s-32 14.3-32 32V224H48c-17.7 0-32 14.3-32 32s14.3 32 32 32H192V432c0 17.7 14.3 32 32 32s32-14.3 32-32V288H400c17.7 0 32-14.3 32-32s-14.3-32-32-32H256V80z"/></svg>
+                                        </i>
+                                        Guardar
+                                    </a>
+                                    <a class="mx-1 btn btn-outline-warning btn-user btn-block" (click)="mostrar_u('ocultar')">
+                                        <i class="me-1">
+                                            <svg xmlns="http://www.w3.org/2000/svg" height="15" width="15" viewBox="0 0 448 512">
+                                                <path d="M256 80c0-17.7-14.3-32-32-32s-32 14.3-32 32V224H48c-17.7 0-32 14.3-32 32s14.3 32 32 32H192V432c0 17.7 14.3 32 32 32s32-14.3 32-32V288H400c17.7 0 32-14.3 32-32s-14.3-32-32-32H256V80z"/></svg>
+                                        </i>
+                                        Cancelar
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-6 mb-3 mb-sm-0" *ngIf="rol == 'Gestor de Bodega' || FO_rol == 3 || FO_rol == 4">
+                            <a class="btn btn-warning btn-user btn-block" (click)="mostrar_m('mostrar')" (click)="mostrar_u('ocultar')">
+                                <i class="me-1">
+                                    <svg xmlns="http://www.w3.org/2000/svg" height="15" width="15" viewBox="0 0 448 512">
+                                        <path d="M256 80c0-17.7-14.3-32-32-32s-32 14.3-32 32V224H48c-17.7 0-32 14.3-32 32s14.3 32 32 32H192V432c0 17.7 14.3 32 32 32s32-14.3 32-32V288H400c17.7 0 32-14.3 32-32s-14.3-32-32-32H256V80z"/></svg>
+                                </i>
+                                Nueva Marca
+                            </a>
+                            <div class="row" *ngIf="most_m == true">
+                                <div class="col-sm-12 mt-3 mb-sm-0 d-inline-flex align-items-center">
+                                    <label for="new_marca">Nombre de Marca:</label>
+                                    <input type="text" class="ms-1 form-control form-control-user" id="new_marca"
+                                        placeholder="Nutresa, Pepsi, Norma..." maxlength="45" [(ngModel)]="obj_marca.nombre">
+                                    <span class="span-alert" *ngIf="validate_m_name == false">Inserte una marca.</span>
+                                </div>
+                                <div class="col-sm-12 mt-3 mb-sm-0 d-inline-flex">
+                                    <a class="mx-1 btn btn-primary-alt btn-user btn-block" (click)="validar_info_m()">
+                                        <i class="me-1">
+                                            <svg xmlns="http://www.w3.org/2000/svg" height="15" width="15" viewBox="0 0 448 512">
+                                                <path d="M256 80c0-17.7-14.3-32-32-32s-32 14.3-32 32V224H48c-17.7 0-32 14.3-32 32s14.3 32 32 32H192V432c0 17.7 14.3 32 32 32s32-14.3 32-32V288H400c17.7 0 32-14.3 32-32s-14.3-32-32-32H256V80z"/></svg>
+                                        </i>
+                                        Guardar
+                                    </a>
+                                    <a class="mx-1 btn btn-outline-warning btn-user btn-block" (click)="mostrar_m('ocultar')">
+                                        <i class="me-1">
+                                            <svg xmlns="http://www.w3.org/2000/svg" height="15" width="15" viewBox="0 0 448 512">
+                                                <path d="M256 80c0-17.7-14.3-32-32-32s-32 14.3-32 32V224H48c-17.7 0-32 14.3-32 32s14.3 32 32 32H192V432c0 17.7 14.3 32 32 32s32-14.3 32-32V288H400c17.7 0 32-14.3 32-32s-14.3-32-32-32H256V80z"/></svg>
+                                        </i>
+                                        Cancelar
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Cuadro de busqueda de Productos -->
+    <div class="card mb-4">
+        <div class="card-header d-inline-flex align-items-center">
+            <i class="me-1">
+                <svg xmlns="http://www.w3.org/2000/svg" height="15" width="15" viewBox="0 0 512 512">
+                    <path d="M416 208c0 45.9-14.9 88.3-40 122.7L502.6 457.4c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L330.7 376c-34.4 25.2-76.8 40-122.7 40C93.1 416 0 322.9 0 208S93.1 0 208 0S416 93.1 416 208zM208 352a144 144 0 1 0 0-288 144 144 0 1 0 0 288z"/>
+                </svg>
+            </i>
+            Buscar:
+            <div class="input-group mx-2 mt-2 mb-1">
+                <input class="form-control" type="text" aria-label="Search for..." aria-describedby="btnNavbarSearch"
+                [(ngModel)]="dato" placeholder="Código, Nombre, Marca (10, Jean, Alpina)"/>
+                <button class="btn btn-dark" id="btnNavbarSearch" type="button" (click)="busqueda(dato)">
+                    <i>
+                        <svg xmlns="http://www.w3.org/2000/svg" height="18" width="18" viewBox="0 0 512 512">
+                            <path fill="#ffffff"
+                            d="M416 208c0 45.9-14.9 88.3-40 122.7L502.6 457.4c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L330.7 376c-34.4 25.2-76.8 40-122.7 40C93.1 416 0 322.9 0 208S93.1 0 208 0S416 93.1 416 208zM208 352a144 144 0 1 0 0-288 144 144 0 1 0 0 288z" />
+                        </svg>
+                    </i>
+                </button>
+            </div>
+        </div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-bordered" id="dataTableProduct" width="100%" cellspacing="0">
+                    <thead class="table-info">
+                        <tr>
+                            <th>Código</th>
+                            <th>Nombre</th>
+                            <th>Presentación</th>
+                            <th>Marca</th>
+                            <th>Cantidad</th>
+                            <th>Precio de venta</th>
+                            <th>Fecha de Vencimiento</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tfoot class="table-dark">
+                        <tr>
+                            <th>Código</th>
+                            <th>Nombre</th>
+                            <th>Presentación</th>
+                            <th>Marca</th>
+                            <th>Cantidad</th>
+                            <th>Precio de venta</th>
+                            <th>Fecha de Vencimiento</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </tfoot>
+                    <tbody>
+                        <tr *ngFor="let item of obtenido">
+                            <td>{{item.id_producto}}</td>
+                            <td>{{item.nombre}}</td>
+                            <td>{{item.medida+" "+item.unidad_med}}</td>
+                            <td>{{item.marca}}</td>
+                            <td>{{item.cantidad_producto}}</td>
+                            <td>{{item.precio_venta | currency}}</td>
+                            <td>{{item.fecha_venc}}</td>
+                            <td>
+                                <div class="sb-nav-link-icon">
+                                    <i class="ms-1 me-1" style="cursor:pointer" title="Editar" (click)="mostrar_edit('mostrar')" (click)="precarga_form(item,item.id_producto)" *ngIf="rol == 'Gestor de Bodega' || FO_rol == 3 || FO_rol == 4">
+                                        <svg xmlns="http://www.w3.org/2000/svg" height="20" width="20" viewBox="0 0 512 512">
+                                            <path 
+                                            d="M352 320c88.4 0 160-71.6 160-160c0-15.3-2.2-30.1-6.2-44.2c-3.1-10.8-16.4-13.2-24.3-5.3l-76.8 76.8c-3 3-7.1 4.7-11.3 4.7H336c-8.8 0-16-7.2-16-16V118.6c0-4.2 1.7-8.3 4.7-11.3l76.8-76.8c7.9-7.9 5.4-21.2-5.3-24.3C382.1 2.2 367.3 0 352 0C263.6 0 192 71.6 192 160c0 19.1 3.4 37.5 9.5 54.5L19.9 396.1C7.2 408.8 0 426.1 0 444.1C0 481.6 30.4 512 67.9 512c18 0 35.3-7.2 48-19.9L297.5 310.5c17 6.2 35.4 9.5 54.5 9.5zM80 408a24 24 0 1 1 0 48 24 24 0 1 1 0-48z"/>
+                                        </svg>
+                                    </i>
+                                    <i class="ms-1 me-1" style="cursor:pointer" title="Actualizar Stock" (click)="mostrar_stock('mostrar')" (click)="precarga_form(item,item.id_producto)" *ngIf="rol == 'Gestor de Bodega' || FO_rol == 3 || FO_rol == 4">
+                                        <svg xmlns="http://www.w3.org/2000/svg" height="20" width="20" viewBox="0 0 576 512">
+                                            <path 
+                                            d="M160 32c9 0 17.5 3.8 23.6 10.4l88 96c11.9 13 11.1 33.3-2 45.2s-33.3 11.1-45.2-2L192 146.3V448c0 17.7-14.3 32-32 32s-32-14.3-32-32V146.3L95.6 181.6c-11.9 13-32.2 13.9-45.2 2s-13.9-32.2-2-45.2l88-96C142.5 35.8 151 32 160 32zM450.7 294c8.3 6 13.3 15.7 13.3 26v96h16c17.7 0 32 14.3 32 32s-14.3 32-32 32H432 384c-17.7 0-32-14.3-32-32s14.3-32 32-32h16V364.4l-5.9 2c-16.8 5.6-34.9-3.5-40.5-20.2s3.5-34.9 20.2-40.5l48-16c9.8-3.3 20.5-1.6 28.8 4.4zm-5-145.1A32 32 0 1 0 418.3 91a32 32 0 1 0 27.4 57.9zm-40.7 54.9C369.6 192.4 344 159.2 344 120c0-48.6 39.4-88 88-88s88 39.4 88 88c0 23.5-7.5 46.3-21.5 65.2L449.7 251c-10.5 14.2-30.6 17.2-44.8 6.7s-17.2-30.6-6.7-44.8l6.8-9.2z"/>
+                                        </svg>
+                                    </i>
+                                    <i class="ms-1 me-1" style="cursor:pointer" title="Actualizar Precios" (click)="mostrar_precio('mostrar')" (click)="precarga_form(item,item.id_producto)" *ngIf="rol == 'Gestor de Bodega' || FO_rol == 3 || FO_rol == 4">
+                                        <svg xmlns="http://www.w3.org/2000/svg" height="20" width="20" viewBox="0 0 320 512">
+                                            <path 
+                                            d="M160 0c17.7 0 32 14.3 32 32V67.7c1.6 .2 3.1 .4 4.7 .7c.4 .1 .7 .1 1.1 .2l48 8.8c17.4 3.2 28.9 19.9 25.7 37.2s-19.9 28.9-37.2 25.7l-47.5-8.7c-31.3-4.6-58.9-1.5-78.3 6.2s-27.2 18.3-29 28.1c-2 10.7-.5 16.7 1.2 20.4c1.8 3.9 5.5 8.3 12.8 13.2c16.3 10.7 41.3 17.7 73.7 26.3l2.9 .8c28.6 7.6 63.6 16.8 89.6 33.8c14.2 9.3 27.6 21.9 35.9 39.5c8.5 17.9 10.3 37.9 6.4 59.2c-6.9 38-33.1 63.4-65.6 76.7c-13.7 5.6-28.6 9.2-44.4 11V480c0 17.7-14.3 32-32 32s-32-14.3-32-32V445.1c-.4-.1-.9-.1-1.3-.2l-.2 0 0 0c-24.4-3.8-64.5-14.3-91.5-26.3c-16.1-7.2-23.4-26.1-16.2-42.2s26.1-23.4 42.2-16.2c20.9 9.3 55.3 18.5 75.2 21.6c31.9 4.7 58.2 2 76-5.3c16.9-6.9 24.6-16.9 26.8-28.9c1.9-10.6 .4-16.7-1.3-20.4c-1.9-4-5.6-8.4-13-13.3c-16.4-10.7-41.5-17.7-74-26.3l-2.8-.7 0 0C119.4 279.3 84.4 270 58.4 253c-14.2-9.3-27.5-22-35.8-39.6c-8.4-17.9-10.1-37.9-6.1-59.2C23.7 116 52.3 91.2 84.8 78.3c13.3-5.3 27.9-8.9 43.2-11V32c0-17.7 14.3-32 32-32z"/>
+                                        </svg>
+                                    </i>
+                                    <i class="ms-1 me-1" style="cursor:pointer" title="Actualizar Fecha de Vencimiento" (click)="mostrar_fecha('mostrar')" (click)="precarga_form(item,item.id_producto)" *ngIf="rol == 'Gestor de Bodega' || FO_rol == 3 || FO_rol == 4">
+                                        <svg xmlns="http://www.w3.org/2000/svg" height="20" width="20" viewBox="0 0 512 512">
+                                            <path 
+                                            d="M75 75L41 41C25.9 25.9 0 36.6 0 57.9V168c0 13.3 10.7 24 24 24H134.1c21.4 0 32.1-25.9 17-41l-30.8-30.8C155 85.5 203 64 256 64c106 0 192 86 192 192s-86 192-192 192c-40.8 0-78.6-12.7-109.7-34.4c-14.5-10.1-34.4-6.6-44.6 7.9s-6.6 34.4 7.9 44.6C151.2 495 201.7 512 256 512c141.4 0 256-114.6 256-256S397.4 0 256 0C185.3 0 121.3 28.7 75 75zm181 53c-13.3 0-24 10.7-24 24V256c0 6.4 2.5 12.5 7 17l72 72c9.4 9.4 24.6 9.4 33.9 0s9.4-24.6 0-33.9l-65-65V152c0-13.3-10.7-24-24-24z"/>
+                                        </svg>
+                                    </i>
+                                    <i class="ms-1 me-1" style="cursor:pointer" title="Eliminar" (click)="eliminar(item.id_producto)" *ngIf="FO_rol == 3 || FO_rol == 4">
+                                        <svg xmlns="http://www.w3.org/2000/svg" height="20" width="20" viewBox="0 0 448 512">
+                                            <path 
+                                            d="M135.2 17.7C140.6 6.8 151.7 0 163.8 0H284.2c12.1 0 23.2 6.8 28.6 17.7L320 32h96c17.7 0 32 14.3 32 32s-14.3 32-32 32H32C14.3 96 0 81.7 0 64S14.3 32 32 32h96l7.2-14.3zM32 128H416V448c0 35.3-28.7 64-64 64H96c-35.3 0-64-28.7-64-64V128zm96 64c-8.8 0-16 7.2-16 16V432c0 8.8 7.2 16 16 16s16-7.2 16-16V208c0-8.8-7.2-16-16-16zm96 0c-8.8 0-16 7.2-16 16V432c0 8.8 7.2 16 16 16s16-7.2 16-16V208c0-8.8-7.2-16-16-16zm96 0c-8.8 0-16 7.2-16 16V432c0 8.8 7.2 16 16 16s16-7.2 16-16V208c0-8.8-7.2-16-16-16z"/>
+                                        </svg>
+                                    </i>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <!-- Formulario de edición colapsable de Productos -->
+    <div class="row mb-2">
+        <div class="col-sm-9 mb-3 mb-sm-0 d-inline-flex align-items-center" *ngIf="most_edit == true">
+            <div class="card mb-4 col-sm-12 mb-3 mb-sm-0">
+                <div class="card-header py-1 d-inline-flex align-items-center justify-content-between">
+                    <i class="me-1">
+                        <svg xmlns="http://www.w3.org/2000/svg" height="14" width="14" viewBox="0 0 512 512">
+                            <path d="M64 256V160H224v96H64zm0 64H224v96H64V320zm224 96V320H448v96H288zM448 256H288V160H448v96zM64 32C28.7 32 0 60.7 0 96V416c0 35.3 28.7 64 64 64H448c35.3 0 64-28.7 64-64V96c0-35.3-28.7-64-64-64H64z"/>
+                        </svg>
+                        Formulario de Edición.
+                    </i>                    
+                </div>
+                <div class="card-body">
+                    <div class="form-group row">
+                        <div class="col-sm-3 mb-3 mb-sm-0 d-inline-flex align-items-center">
+                            <label for="id_producto">Código de Producto:</label>
+                            <input type="number" class="form-control form-control-user" id="id_producto"
+                                placeholder="4234" min="1" [(ngModel)]="obj_producto.id_producto">
+                            <span class="span-alert" *ngIf="validate_cod == false">Inserte un código.</span>
+                        </div>
+                        <div class="col-sm-9 mb-3 mb-sm-0 d-inline-flex align-items-center">
+                            <label for="nombre_producto">Nombre de Producto:</label>
+                            <input type="text" class="form-control form-control-user" id="nombre_producto"
+                                placeholder="Boligrafo BIC negro" [(ngModel)]="obj_producto.nombre">
+                            <span class="span-alert" *ngIf="validate_name == false">Inserte un nombre.</span>
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <div class="col-sm-4 mb-3 mb-sm-0 d-inline-flex align-items-center">
+                            <label for="medida_show">Medida de presentación:</label>
+                            <input type="number" class="form-control form-control-user" id="medida_show"
+                                placeholder="250" [(ngModel)]="obj_producto.medida">
+                            <span class="span-alert" *ngIf="validate_med == false">Indica una medida.</span>
+                        </div>
+                        <div class="col-sm-3 mb-sm-0 mb-3 align-self-center align-items-center form-floating">
+                            <select class="form-select form-select-lg" id="selec_unidad" aria-label="Floating label select example" 
+                            [(ngModel)]="obj_producto.FO_unidad">
+                                <option *ngFor="let itemu of unidad" value="{{itemu.id_unidad}}">{{itemu.nombre}}</option>
+                            </select>
+                            <label for="selec_unidad">Unidad</label>
+                            <span class="span-alert" *ngIf="validate_und == false">Selecciona una unidad.</span>
+                        </div>
+                        <div class="col-sm-3 mb-sm-0 mb-3 align-self-center align-items-center form-floating">
+                            <select class="form-select form-select-lg" id="selec_marca" [(ngModel)]="obj_producto.FO_marca">
+                                <option *ngFor="let itemk of marca" value="{{itemk.id_marca}}">{{itemk.nombre}}</option>
+                            </select>
+                            <label for="selec_marca">Marca</label>
+                            <span class="span-alert" *ngIf="validate_mark == false">Selecciona una marca.</span>
+                        </div>
+                    </div>
+
+                    <div class="form-group row align-self-center align-items-center">
+                        <div class="col-sm-6 mb-3 mb-sm-0 d-inline-flex align-items-center">
+                            <a class="btn btn-primary-alt btn-user btn-block" (click)="validar_info()" (click)="mostrar_edit('ocultar')">
+                                Guardar Cambios
+                            </a>
+                        </div>
+                        <div class="col-sm-6 mb-3 mb-sm-0 d-inline-flex align-items-center">
+                            <a class="btn btn-outline-warning btn-user btn-block" (click)="mostrar_edit('ocultar')">
+                                Cancelar Cambios
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Formulario de Actualización colapsable de Stock de Productos -->
+        <div class="col-sm-3 mb-3 mb-sm-0 d-block align-items-center" *ngIf="most_stock == true">
+            <div class="card mb-4 col-sm-12 mb-sm-0 d-inline-flex">
+                <div class="card-header py-1 d-inline-flex align-items-center justify-content-between">
+                    <i class="me-1">
+                        <svg xmlns="http://www.w3.org/2000/svg" height="14" width="14" viewBox="0 0 512 512">
+                            <path d="M64 256V160H224v96H64zm0 64H224v96H64V320zm224 96V320H448v96H288zM448 256H288V160H448v96zM64 32C28.7 32 0 60.7 0 96V416c0 35.3 28.7 64 64 64H448c35.3 0 64-28.7 64-64V96c0-35.3-28.7-64-64-64H64z"/>
+                        </svg>
+                        Actualizar Stock.
+                    </i>                    
+                </div>
+                <div class="card-body">
+                    <div class="form-group row">
+                        <div class="col-sm-12 mb-3 mb-sm-0 d-inline-flex align-items-center">
+                            <label for="producto_stock">Nombre de Producto:</label>
+                            <p class="form-control form-control-user" id="producto_stock">
+                                {{obj_producto.nombre}}
+                            </p>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-sm-6 mb-3 mb-sm-0 d-inline-flex align-items-center">
+                            <label for="actual_stock">Stock actual:</label>
+                            <p class="form-control form-control-user" id="actual_stock">
+                                {{obj_producto.cantidad_producto}}
+                            </p>
+                        </div>
+                        <div class="col-sm-6 mb-3 mb-sm-0 d-inline-flex align-items-center">
+                            <label for="nuevo_stock">Nuevo Stock:</label>
+                            <input type="number" class="form-control form-control-user" id="nuevo_stock"
+                            placeholder="21" [(ngModel)]="obj_producto.cantidad_producto">
+                            <span class="span-alert" *ngIf="validate_cant == false">Indica una cantidad.</span>
+                        </div>
+                    </div>
+                    <div class="form-group row align-self-center align-items-center">
+                        <div class="col-sm-6 mb-3 mb-sm-0 d-inline-flex align-items-center">
+                            <a class="btn btn-primary-alt btn-user btn-block" (click)="validar_info()" (click)="mostrar_stock('ocultar')">
+                                Actualizar
+                            </a>
+                        </div>
+                        <div class="col-sm-6 mb-3 mb-sm-0 d-inline-flex align-items-center">
+                            <a class="btn btn-outline-warning btn-user btn-block" (click)="mostrar_stock('ocultar')">
+                                Cancelar
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>            
+        </div>
+        <!-- Formulario de Actualización colapsable de Precios de Productos -->
+        <div class="col-sm-3 mb-3 mb-sm-0 d-block align-items-center" *ngIf="most_precio == true">
+            <div class="card mb-4 col-sm-12 mb-sm-0 d-inline-flex">
+                <div class="card-header py-1 d-inline-flex align-items-center justify-content-between">
+                    <i class="me-1">
+                        <svg xmlns="http://www.w3.org/2000/svg" height="14" width="14" viewBox="0 0 512 512">
+                            <path d="M64 256V160H224v96H64zm0 64H224v96H64V320zm224 96V320H448v96H288zM448 256H288V160H448v96zM64 32C28.7 32 0 60.7 0 96V416c0 35.3 28.7 64 64 64H448c35.3 0 64-28.7 64-64V96c0-35.3-28.7-64-64-64H64z"/>
+                        </svg>
+                        Actualizar Precio de Venta.
+                    </i>                    
+                </div>
+                <div class="card-body">
+                    <div class="form-group row">
+                        <div class="col-sm-12 mb-3 mb-sm-0 d-inline-flex align-items-center">
+                            <label for="producto_precio">Nombre del Producto:</label>
+                            <p class="form-control form-control-user" id="producto_precio">
+                                {{obj_producto.nombre}}
+                            </p>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-sm-6 mb-3 mb-sm-0 d-inline-flex align-items-center">
+                            <label for="actual_precio">Precio Actual:</label>
+                            <p class="form-control form-control-user" id="actual_precio">
+                                {{obj_producto.precio_venta}}
+                            </p>
+                        </div>
+                        <div class="col-sm-6 mb-3 mb-sm-0 d-inline-flex align-items-center">
+                            <label for="nuevo_precio">Nuevo Precio:</label>
+                            <input type="number" class="form-control form-control-user" id="nuevo_precio"
+                            placeholder="21" [(ngModel)]="obj_producto.precio_venta">
+                            <span class="span-alert" *ngIf="validate_cant == false">Indica un precio.</span>
+                        </div>
+                    </div>
+                    <div class="form-group row align-self-center align-items-center">
+                        <div class="col-sm-6 mb-3 mb-sm-0 d-inline-flex align-items-center">
+                            <a class="btn btn-primary-alt btn-user btn-block" (click)="validar_info()" (click)="mostrar_precio('ocultar')">
+                                Actualizar
+                            </a>
+                        </div>
+                        <div class="col-sm-6 mb-3 mb-sm-0 d-inline-flex align-items-center">
+                            <a class="btn btn-outline-warning btn-user btn-block" (click)="mostrar_precio('ocultar')">
+                                Cancelar
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Formulario de Actualización colapsable de Fechas de vencimiento de Productos -->
+        <div class="col-sm-3 mb-3 mb-sm-0 d-block align-items-center" *ngIf="most_fecha == true">
+            <div class="card mb-4 col-sm-12 mb-sm-0 d-inline-flex">
+                <div class="card-header py-1 d-inline-flex align-items-center justify-content-between">
+                    <i class="me-1">
+                        <svg xmlns="http://www.w3.org/2000/svg" height="14" width="14" viewBox="0 0 512 512">
+                            <path d="M64 256V160H224v96H64zm0 64H224v96H64V320zm224 96V320H448v96H288zM448 256H288V160H448v96zM64 32C28.7 32 0 60.7 0 96V416c0 35.3 28.7 64 64 64H448c35.3 0 64-28.7 64-64V96c0-35.3-28.7-64-64-64H64z"/>
+                        </svg>
+                        Actualizar Fecha de Vencimiento.
+                    </i>                    
+                </div>
+                <div class="card-body">
+                    <div class="form-group row">
+                        <div class="col-sm-12 mb-3 mb-sm-0 d-inline-flex align-items-center">
+                            <label for="producto_fecha">Nombre del Producto:</label>
+                            <p class="form-control form-control-user" id="producto_fecha">
+                                {{obj_producto.nombre}}
+                            </p>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-sm-6 mb-3 mb-sm-0 d-inline-flex align-items-center">
+                            <label for="actual_fecha">Fecha de Vencimiento:</label>
+                            <p class="form-control form-control-user" id="actual_fecha">
+                                {{obj_producto.fecha_venc}}
+                            </p>
+                        </div>
+                        <div class="col-sm-6 mb-3 mb-sm-0 d-inline-flex align-items-center">
+                            <label for="nueva_fecha">Nueva Fecha:</label>
+                            <input type="date" class="form-control form-control-user" id="nueva_fecha"
+                            title="Fecha de Vencimiento" [(ngModel)]="obj_producto.fecha_venc">
+                            <span class="span-alert" *ngIf="validate_datev == false">Establece la fecha de vencimiento.</span>
+                        </div>
+                    </div>
+                    <div class="form-group row align-self-center align-items-center">
+                        <div class="col-sm-6 mb-3 mb-sm-0 d-inline-flex align-items-center">
+                            <a class="btn btn-primary-alt btn-user btn-block" (click)="validar_info()" (click)="mostrar_fecha('ocultar')">
+                                Actualizar
+                            </a>
+                        </div>
+                        <div class="col-sm-6 mb-3 mb-sm-0 d-inline-flex align-items-center">
+                            <a class="btn btn-outline-warning btn-user btn-block" (click)="mostrar_fecha('ocultar')">
+                                Cancelar
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Contenido Tabla de Productos -->
+    <div class="card mb-4">
+        <div class="card-header py-1 d-inline-flex align-items-center justify-content-between">
+            <i class="me-1">
+                <svg xmlns="http://www.w3.org/2000/svg" height="14" width="14" viewBox="0 0 512 512">
+                    <path d="M64 256V160H224v96H64zm0 64H224v96H64V320zm224 96V320H448v96H288zM448 256H288V160H448v96zM64 32C28.7 32 0 60.7 0 96V416c0 35.3 28.7 64 64 64H448c35.3 0 64-28.7 64-64V96c0-35.3-28.7-64-64-64H64z"/>
+                </svg>
+                Lista de Productos.
+            </i>
+            
+            <a [routerLink]="['/register-product']" class="btn btn-primary-alt btn-user btn-lg" *ngIf="rol == 'Gestor de Bodega' || FO_rol == 3 || FO_rol == 4">
+                <i class="me-1">
+                    <svg xmlns="http://www.w3.org/2000/svg" height="18" width="18" viewBox="0 0 448 512">
+                        <path d="M256 80c0-17.7-14.3-32-32-32s-32 14.3-32 32V224H48c-17.7 0-32 14.3-32 32s14.3 32 32 32H192V432c0 17.7 14.3 32 32 32s32-14.3 32-32V288H400c17.7 0 32-14.3 32-32s-14.3-32-32-32H256V80z"/></svg>
+                </i>
+                Nuevo Producto
+            </a>
+        </div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-bordered" id="dataTableProduct" width="100%" cellspacing="0">
+                    <thead class="table-info">
+                        <tr>
+                            <th>Código</th>
+                            <th>Nombre</th>
+                            <th>Presentación</th>
+                            <th>Marca</th>
+                            <th>Cantidad</th>
+                            <th>Precio de venta</th>
+                            <th>Fecha de Vencimiento</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tfoot class="table-dark">
+                        <tr>
+                            <th>Código</th>
+                            <th>Nombre</th>
+                            <th>Presentación</th>
+                            <th>Marca</th>
+                            <th>Cantidad</th>
+                            <th>Precio de venta</th>
+                            <th>Fecha de Vencimiento</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </tfoot>
+                    <tbody>
+                        <tr *ngFor="let item of producto">
+                            <td>{{item.id_producto}}</td>
+                            <td>{{item.nombre}}</td>
+                            <td>{{item.medida+" "+item.unidad_med}}</td>
+                            <td>{{item.marca}}</td>
+                            <td>{{item.cantidad_producto}}</td>
+                            <td>{{item.precio_venta | currency}}</td>
+                            <td>{{item.fecha_venc}}</td>
+                            <td>
+                                <div class="sb-nav-link-icon">
+                                    <i class="ms-1 me-1" style="cursor:pointer" title="Editar" (click)="mostrar_edit('mostrar')" (click)="precarga_form(item,item.id_producto)" *ngIf="rol == 'Gestor de Bodega' || FO_rol == 3 || FO_rol == 4">
+                                        <svg xmlns="http://www.w3.org/2000/svg" height="20" width="20" viewBox="0 0 512 512">
+                                            <path 
+                                            d="M352 320c88.4 0 160-71.6 160-160c0-15.3-2.2-30.1-6.2-44.2c-3.1-10.8-16.4-13.2-24.3-5.3l-76.8 76.8c-3 3-7.1 4.7-11.3 4.7H336c-8.8 0-16-7.2-16-16V118.6c0-4.2 1.7-8.3 4.7-11.3l76.8-76.8c7.9-7.9 5.4-21.2-5.3-24.3C382.1 2.2 367.3 0 352 0C263.6 0 192 71.6 192 160c0 19.1 3.4 37.5 9.5 54.5L19.9 396.1C7.2 408.8 0 426.1 0 444.1C0 481.6 30.4 512 67.9 512c18 0 35.3-7.2 48-19.9L297.5 310.5c17 6.2 35.4 9.5 54.5 9.5zM80 408a24 24 0 1 1 0 48 24 24 0 1 1 0-48z"/>
+                                        </svg>
+                                    </i>
+                                    <i class="ms-1 me-1" style="cursor:pointer" title="Actualizar Stock" (click)="mostrar_stock('mostrar')" (click)="precarga_form(item,item.id_producto)" *ngIf="rol == 'Gestor de Bodega' || FO_rol == 3 || FO_rol == 4">
+                                        <svg xmlns="http://www.w3.org/2000/svg" height="20" width="20" viewBox="0 0 576 512">
+                                            <path 
+                                            d="M160 32c9 0 17.5 3.8 23.6 10.4l88 96c11.9 13 11.1 33.3-2 45.2s-33.3 11.1-45.2-2L192 146.3V448c0 17.7-14.3 32-32 32s-32-14.3-32-32V146.3L95.6 181.6c-11.9 13-32.2 13.9-45.2 2s-13.9-32.2-2-45.2l88-96C142.5 35.8 151 32 160 32zM450.7 294c8.3 6 13.3 15.7 13.3 26v96h16c17.7 0 32 14.3 32 32s-14.3 32-32 32H432 384c-17.7 0-32-14.3-32-32s14.3-32 32-32h16V364.4l-5.9 2c-16.8 5.6-34.9-3.5-40.5-20.2s3.5-34.9 20.2-40.5l48-16c9.8-3.3 20.5-1.6 28.8 4.4zm-5-145.1A32 32 0 1 0 418.3 91a32 32 0 1 0 27.4 57.9zm-40.7 54.9C369.6 192.4 344 159.2 344 120c0-48.6 39.4-88 88-88s88 39.4 88 88c0 23.5-7.5 46.3-21.5 65.2L449.7 251c-10.5 14.2-30.6 17.2-44.8 6.7s-17.2-30.6-6.7-44.8l6.8-9.2z"/>
+                                        </svg>
+                                    </i>
+                                    <i class="ms-1 me-1" style="cursor:pointer" title="Actualizar Precios" (click)="mostrar_precio('mostrar')" (click)="precarga_form(item,item.id_producto)" *ngIf="rol == 'Gestor de Bodega' || FO_rol == 3 || FO_rol == 4">
+                                        <svg xmlns="http://www.w3.org/2000/svg" height="20" width="20" viewBox="0 0 320 512">
+                                            <path 
+                                            d="M160 0c17.7 0 32 14.3 32 32V67.7c1.6 .2 3.1 .4 4.7 .7c.4 .1 .7 .1 1.1 .2l48 8.8c17.4 3.2 28.9 19.9 25.7 37.2s-19.9 28.9-37.2 25.7l-47.5-8.7c-31.3-4.6-58.9-1.5-78.3 6.2s-27.2 18.3-29 28.1c-2 10.7-.5 16.7 1.2 20.4c1.8 3.9 5.5 8.3 12.8 13.2c16.3 10.7 41.3 17.7 73.7 26.3l2.9 .8c28.6 7.6 63.6 16.8 89.6 33.8c14.2 9.3 27.6 21.9 35.9 39.5c8.5 17.9 10.3 37.9 6.4 59.2c-6.9 38-33.1 63.4-65.6 76.7c-13.7 5.6-28.6 9.2-44.4 11V480c0 17.7-14.3 32-32 32s-32-14.3-32-32V445.1c-.4-.1-.9-.1-1.3-.2l-.2 0 0 0c-24.4-3.8-64.5-14.3-91.5-26.3c-16.1-7.2-23.4-26.1-16.2-42.2s26.1-23.4 42.2-16.2c20.9 9.3 55.3 18.5 75.2 21.6c31.9 4.7 58.2 2 76-5.3c16.9-6.9 24.6-16.9 26.8-28.9c1.9-10.6 .4-16.7-1.3-20.4c-1.9-4-5.6-8.4-13-13.3c-16.4-10.7-41.5-17.7-74-26.3l-2.8-.7 0 0C119.4 279.3 84.4 270 58.4 253c-14.2-9.3-27.5-22-35.8-39.6c-8.4-17.9-10.1-37.9-6.1-59.2C23.7 116 52.3 91.2 84.8 78.3c13.3-5.3 27.9-8.9 43.2-11V32c0-17.7 14.3-32 32-32z"/>
+                                        </svg>
+                                    </i>
+                                    <i class="ms-1 me-1" style="cursor:pointer" title="Actualizar Fecha de Vencimiento" (click)="mostrar_fecha('mostrar')" (click)="precarga_form(item,item.id_producto)" *ngIf="rol == 'Gestor de Bodega' || FO_rol == 3 || FO_rol == 4">
+                                        <svg xmlns="http://www.w3.org/2000/svg" height="20" width="20" viewBox="0 0 512 512">
+                                            <path 
+                                            d="M75 75L41 41C25.9 25.9 0 36.6 0 57.9V168c0 13.3 10.7 24 24 24H134.1c21.4 0 32.1-25.9 17-41l-30.8-30.8C155 85.5 203 64 256 64c106 0 192 86 192 192s-86 192-192 192c-40.8 0-78.6-12.7-109.7-34.4c-14.5-10.1-34.4-6.6-44.6 7.9s-6.6 34.4 7.9 44.6C151.2 495 201.7 512 256 512c141.4 0 256-114.6 256-256S397.4 0 256 0C185.3 0 121.3 28.7 75 75zm181 53c-13.3 0-24 10.7-24 24V256c0 6.4 2.5 12.5 7 17l72 72c9.4 9.4 24.6 9.4 33.9 0s9.4-24.6 0-33.9l-65-65V152c0-13.3-10.7-24-24-24z"/>
+                                        </svg>
+                                    </i>
+                                    <i class="ms-1 me-1" style="cursor:pointer" title="Eliminar" (click)="eliminar(item.id_producto)" *ngIf="FO_rol == 3 || FO_rol == 4">
+                                        <svg xmlns="http://www.w3.org/2000/svg" height="20" width="20" viewBox="0 0 448 512">
+                                            <path 
+                                            d="M135.2 17.7C140.6 6.8 151.7 0 163.8 0H284.2c12.1 0 23.2 6.8 28.6 17.7L320 32h96c17.7 0 32 14.3 32 32s-14.3 32-32 32H32C14.3 96 0 81.7 0 64S14.3 32 32 32h96l7.2-14.3zM32 128H416V448c0 35.3-28.7 64-64 64H96c-35.3 0-64-28.7-64-64V128zm96 64c-8.8 0-16 7.2-16 16V432c0 8.8 7.2 16 16 16s16-7.2 16-16V208c0-8.8-7.2-16-16-16zm96 0c-8.8 0-16 7.2-16 16V432c0 8.8 7.2 16 16 16s16-7.2 16-16V208c0-8.8-7.2-16-16-16zm96 0c-8.8 0-16 7.2-16 16V432c0 8.8 7.2 16 16 16s16-7.2 16-16V208c0-8.8-7.2-16-16-16z"/>
+                                        </svg>
+                                    </i>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

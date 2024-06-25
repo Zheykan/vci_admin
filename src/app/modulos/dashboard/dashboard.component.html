@@ -1,44 +1,51 @@
 <!-- Page Heading -->
-<main>
-    <div class="container-fluid px-4">
-        <h1 class="mt-4">Dashboard</h1>
+    <div class="container-fluid bg-gradient-third-section p-4">
+        <h1 class="pt-4">Dashboard</h1>
         <ol class="breadcrumb mb-4">
-            <li class="breadcrumb-item active">Dashboard</li>
+            <li class="breadcrumb-item active">Gestiona integralmente todas las operaciones de tu negocio.</li>
         </ol>
         <div class="row">
-            <div class="col-xl-3 col-md-6">
-                <div class="card bg-primary text-white mb-4">
-                    <div class="card-body">Primary Card</div>
+            <div class="col-xl-3 col-md-6" *ngIf="rol == 'Vendedor' || FO_rol == 3 || FO_rol == 4">
+                <div class="card bg-success strong text-white mb-4">
+                    <div class="card-body">Ventas</div>
                     <div class="card-footer d-flex align-items-center justify-content-between">
-                        <a class="small text-white stretched-link" href="#">View Details</a>
-                        <div class="small text-white"><i class="fas fa-angle-right"></i></div>
+                        <a class="strong text-white stretched-link" [routerLink]="['/sale']">Ir a...</a>
+                        <div class="strong text-white">
+                            <i class="fas fa-angle-right"></i>
+                        </div>
                     </div>
                 </div>
             </div>
             <div class="col-xl-3 col-md-6">
-                <div class="card bg-warning text-white mb-4">
-                    <div class="card-body">Warning Card</div>
+                <div class="card bg-primary strong text-white mb-4">
+                    <div class="card-body">Inventario</div>
                     <div class="card-footer d-flex align-items-center justify-content-between">
-                        <a class="small text-white stretched-link" href="#">View Details</a>
-                        <div class="small text-white"><i class="fas fa-angle-right"></i></div>
+                        <a class="strong text-white stretched-link" [routerLink]="['/product']">Ir a...</a>
+                        <div class="strong text-white">
+                            <i class="fas fa-angle-right"></i>
+                        </div>
                     </div>
                 </div>
             </div>
-            <div class="col-xl-3 col-md-6">
-                <div class="card bg-success text-white mb-4">
-                    <div class="card-body">Success Card</div>
+            <div class="col-xl-3 col-md-6" *ngIf="FO_rol == 3 || FO_rol == 4">
+                <div class="card bg-warning strong text-dark mb-4">
+                    <div class="card-body">Usuarios</div>
                     <div class="card-footer d-flex align-items-center justify-content-between">
-                        <a class="small text-white stretched-link" href="#">View Details</a>
-                        <div class="small text-white"><i class="fas fa-angle-right"></i></div>
+                        <a class="strong text-dark stretched-link" [routerLink]="['/user']">Ir a...</a>
+                        <div class="strong text-dark">
+                            <i class="fas fa-angle-right"></i>
+                        </div>
                     </div>
                 </div>
             </div>
-            <div class="col-xl-3 col-md-6">
-                <div class="card bg-danger text-white mb-4">
-                    <div class="card-body">Danger Card</div>
+            <div class="col-xl-3 col-md-6" *ngIf="rol == 'Gestor de Bodega' || FO_rol == 3 || FO_rol == 4">
+                <div class="card bg-danger strong text-white mb-4">
+                    <div class="card-body">Suministros</div>
                     <div class="card-footer d-flex align-items-center justify-content-between">
-                        <a class="small text-white stretched-link" href="#">View Details</a>
-                        <div class="small text-white"><i class="fas fa-angle-right"></i></div>
+                        <a class="strong text-white stretched-link" [routerLink]="['/purchase']">Ir a...</a>
+                        <div class="strong text-white">
+                            <i class="fas fa-angle-right"></i>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -552,6 +559,3 @@
             </div>
         </div>
     </div>
-</main>
-<hr class="sidebar-divider">
-<!-- End Page Heading -->

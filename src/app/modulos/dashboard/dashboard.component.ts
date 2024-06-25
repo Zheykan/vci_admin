@@ -7,4 +7,11 @@ import { Component } from '@angular/core';
 })
 export class DashboardComponent {
 
+  FO_rol: any ;
+  rol : any ;
+
+  ngOnInit(): void{
+    this.FO_rol = sessionStorage.getItem("FO_rol") ;
+    this.rol = sessionStorage.getItem("rol") ;
+  }
 }

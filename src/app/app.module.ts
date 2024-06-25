@@ -11,10 +11,31 @@ import { ToolbarComponent } from './estructura/toolbar/toolbar.component';
 import { TopbarComponent } from './estructura/topbar/topbar.component';
 import { PrincipalComponent } from './modulos/principal.component';
 import { DashboardComponent } from './modulos/dashboard/dashboard.component';
-import { LoginComponent } from './modulos/login/login.component';
-import { RegisterComponent } from './modulos/register/register.component';
-import { ForgotPasswordComponent } from './modulos/forgot-password/forgot-password.component';
+import { ClientComponent } from './modulos/client/client.component';
+import { DevolutionComponent } from './modulos/devolution/devolution.component';
 import { ErrorNotFoundComponent } from './modulos/error-not-found/error-not-found.component';
+import { ForgotPasswordComponent } from './modulos/forgot-password/forgot-password.component';
+import { LoginComponent } from './modulos/login/login.component';
+import { ProductComponent } from './modulos/product/product.component';
+import { ProviderComponent } from './modulos/provider/provider.component';
+import { PurchaseComponent } from './modulos/purchase/purchase.component';
+import { RegisterComponent } from './modulos/register/register.component';
+import { SaleComponent } from './modulos/sale/sale.component';
+import { UserComponent } from './modulos/user/user.component';
+import { RegisterProductComponent } from './modulos/register-product/register-product.component';
+import { CityComponent } from './modulos/city/city.component';
+import { MarkComponent } from './modulos/mark/mark.component';
+import { UnityComponent } from './modulos/unity/unity.component';
+import { ErrorhComponent } from './modulos/errorh/errorh.component';
+import { RegisterClientComponent } from './modulos/register-client/register-client.component';
+import { RegisterProvideerComponent } from './modulos/register-provideer/register-provideer.component';
+import { RegisterPurchaseComponent } from './modulos/register-purchase/register-purchase.component';
+import { RegisterSaleComponent } from './modulos/register-sale/register-sale.component';
+import { DepartmentComponent } from './modulos/department/department.component';
+import { HelpComponent } from './modulos/help/help.component';
+
+
+
 
 @NgModule({
   declarations: [
@@ -25,10 +46,28 @@ import { ErrorNotFoundComponent } from './modulos/error-not-found/error-not-foun
     TopbarComponent,
     PrincipalComponent,
     DashboardComponent,
-    LoginComponent,
-    RegisterComponent,
+    ClientComponent,
+    DevolutionComponent,
+    ErrorNotFoundComponent,
     ForgotPasswordComponent,
-    ErrorNotFoundComponent
+    LoginComponent,
+    ProductComponent,
+    ProviderComponent,
+    PurchaseComponent,
+    RegisterComponent,
+    SaleComponent,
+    UserComponent,
+    RegisterProductComponent,
+    CityComponent,
+    MarkComponent,
+    UnityComponent,
+    ErrorhComponent,
+    RegisterClientComponent,
+    RegisterProvideerComponent,
+    RegisterPurchaseComponent,
+    RegisterSaleComponent,
+    DepartmentComponent,
+    HelpComponent
   ],
   imports: [
     BrowserModule,

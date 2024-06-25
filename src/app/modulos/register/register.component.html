@@ -11,73 +11,71 @@
                             <div class="text-center">
                                 <h1 class="h4 text-gray-900 mb-4">Registrar Cuenta!</h1>
                             </div>
-                            <form class="user">
+                            <div class="user">
+
                                 <div class="form-group row">
-                                    <div class="col-sm-6 mb-3 mb-sm-0">
-                                        <input type="text" class="form-control form-control-user" id="exampleFirstName"
-                                            placeholder="Primer Nombre">
-                                    </div>
-                                    <div class="col-sm-6">
-                                        <input type="text" class="form-control form-control-user"
-                                            id="exampleSecondtName" placeholder="Segundo Nombre">
+                                    <div class="col-sm-11 mb-3 mb-sm-0 d-inline-flex align-items-center">
+                                        <label for="Name_Lastname">Nombre de Usuario:</label>
+                                        <input type="text" class="form-control form-control-user" id="Name_Lastname"
+                                        placeholder="Nombres y Apellidos" required="required" [(ngModel)]="obj_usuario.nombre">
+                                        <span class="span-alert" *ngIf="validate_name == false">Inserte un Nombre Valido.</span>
                                     </div>
                                 </div>
+
                                 <div class="form-group row">
-                                    <div class="col-sm-6 mb-3 mb-sm-0">
-                                        <input type="text" class="form-control form-control-user" id="exampleLastName1"
-                                            placeholder="Primer Apellido">
+                                    <div class="col-sm-6 mb-3 mb-sm-0 d-inline-flex align-items-center">
+                                        <label for="InputTel">Número de telefono:</label>
+                                        <input type="tel" class="form-control form-control-user" id="InputTel"
+                                            placeholder="+57 - Número de Celular" minlength="10" maxlength="10" 
+                                            [(ngModel)]="obj_usuario.telefono">
+                                        <span class="span-alert" *ngIf="validate_tel == false">Inserte un Telefono Valido.</span>
                                     </div>
-                                    <div class="col-sm-6">
-                                        <input type="text" class="form-control form-control-user" id="exampleLastName2"
-                                            placeholder="Segundo Apellido">
-                                    </div>
-                                </div>
-                                <div class="form-group row">
-                                    <div class="col-sm-6 mb-3 mb-sm-0">
-                                        <input type="tel" class="form-control form-control-user" id="exampleInputTel"
-                                            placeholder="+57 - Número de Celular" minlength="10" maxlength="10">
-                                    </div>
-                                    <div class="col-sm-3 mb-3 mb-sm-0 py-2">
-                                        <select class="form-select form-select-lg mb-3">
-                                            <option selected>Rol</option>
-                                            <option value="1">Administrador</option>
-                                            <option value="2">Gestor de Bodega</option>
-                                            <option value="3">Soporte técnico</option>
-                                            <option value="4">Vendedor</option>
+                                    <div class="col-sm-4 mb-3 mb-sm-0 align-self-center align-items-center form-floating">
+                                        <select class="form-select form-select-lg" required="required" id="selec_rol" [(ngModel)]="obj_usuario.FO_rol">
+                                            <option *ngFor="let itemR of rol" value="{{itemR.id_rol}}">{{itemR.rol}}</option>
                                           </select>
+                                          <label for="selec_rol">Rol</label>
+                                          <span class="span-alert" *ngIf="validate_rol == false">Selecciona un Rol.</span>
                                     </div>
-                                    <div class="col-sm-3 mb-3 mb-sm-0 py-2">
-                                        <select class="form-select form-select-lg mb-3">
-                                            <option selected>Caja</option>
-                                            <option value="1">01</option>
-                                            <option value="2">02</option>
-                                            <option value="3">03</option>
-                                            <option value="4">04</option>
-                                            <option value="5">05</option>
+                                    <div class="col-sm-2 mb-3 mb-sm-0 align-self-center align-items-center form-floating">
+                                        <select class="form-select form-select-lg" id="selec_box" [(ngModel)]="obj_usuario.caja">
+                                            <option value="0" selected>0</option>
+                                            <option value="1">1</option>
+                                            <option value="2">2</option>
+                                            <option value="3">3</option>
+                                            <option value="4">4</option>
+                                            <option value="5">5</option>
                                           </select>
+                                          <label for="selec_box">Caja</label>
+                                          <span class="span-alert" *ngIf="validate_box == false">Selecciona una Caja.</span>
                                     </div>
                                 </div>
-                                <div class="form-group">
-                                    <input type="email" class="form-control form-control-user" id="exampleInputEmail"
-                                        placeholder="Dirección de correo electrónico">
-                                </div>
+
                                 <div class="form-group row">
-                                    <div class="col-sm-6 mb-3 mb-sm-0">
-                                        <input type="password" class="form-control form-control-user"
-                                            id="exampleInputPassword" placeholder="Contraseña">
-                                    </div>
-                                    <div class="col-sm-6">
-                                        <input type="password" class="form-control form-control-user"
-                                            id="exampleRepeatPassword" placeholder="Confirmar contraseña">
+                                    <div class="col-sm-11 mb-3 mb-sm-0 d-inline-flex align-items-center">
+                                        <label for="InputEmail">Dirección de correo electrónico:</label>
+                                        <input type="email" class="form-control form-control-user" id="InputEmail"
+                                        placeholder="tucorreo@mail.com" required="required" [(ngModel)]="obj_usuario.correo">
+                                        <span class="span-alert" *ngIf="validate_email == false">Inserte un Correo Valido.</span>
                                     </div>
                                 </div>
-                                <a href="login" class="btn btn-primary-alt btn-user btn-block">
+
+                                <div class="form-group row">
+                                    <div class="col-sm-11 mb-3 mb-sm-0 d-inline-flex align-items-center">
+                                        <label for="InputPassword">Contraseña de Usuario:</label>
+                                        <input type="password" class="form-control form-control-user" id="InputPassword"
+                                        placeholder="********" max="12" required="required" [(ngModel)]="obj_usuario.contrasenia">
+                                        <span class="span-alert" *ngIf="validate_pass == false">Inserte una contraseña valida.</span>
+                                    </div>
+                                </div>
+                                
+                                <a [routerLink]="['/login']" class="btn btn-primary-alt btn-user btn-block" (click)="validar_info()">
                                     Registrar Cuenta
                                 </a>
-                            </form>
+                            </div>
                             <hr>
                             <div class="text-center">
-                                <a class="small" href="login">Ya tienes una Cuenta? Inicia Sesión!</a>
+                                <a class="small" [routerLink]="['/login']">Ya tienes una Cuenta? Inicia Sesión!</a>
                             </div>
                         </div>
                     </div>

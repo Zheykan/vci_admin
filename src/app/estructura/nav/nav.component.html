@@ -5,7 +5,7 @@
             <!-- Button Home -->
             <div class="nav">
                 <div class="sb-sidenav-menu-heading">Inicio</div>
-                <a class="nav-link" href="index.html">
+                <a [routerLink]="['/dashboard']" class="nav-link">
                     <div class="sb-nav-link-icon">
                         <i>
                             <svg xmlns="http://www.w3.org/2000/svg" height="18" width="18" viewBox="0 0 512 512">
@@ -19,7 +19,7 @@
                 <hr class="sidebar-divider px-0">
                 <!-- Accordion menu USERS -->
                 <div class="sb-sidenav-menu-heading">Menú Principal</div>
-                <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseUsers" aria-expanded="false" aria-controls="collapseUsers">
+                <a class="nav-link collapsed" data-bs-toggle="collapse" data-bs-target="#collapseUsers" aria-expanded="false" aria-controls="collapseUsers">
                     <div class="sb-nav-link-icon">
                         <i>
                             <svg xmlns="http://www.w3.org/2000/svg" height="18" width="18" viewBox="0 0 448 512">
@@ -40,7 +40,7 @@
                 </a>
                 <div class="collapse" id="collapseUsers" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
                     <nav class="sb-sidenav-menu-nested nav bg-white py-1 mx-5 mt-2 collapse-inner rounded">
-                        <a class="nav-link py-1 px-2" href="register">
+                        <a [routerLink]="['register']" class="nav-link py-1 px-2" *ngIf="FO_rol == 3 || FO_rol == 4">
                             <i class="pe-1">
                                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" height="6" width="6">
                                     <path 
@@ -49,34 +49,16 @@
                             </i>
                             Registrar
                         </a>
-                        <a class="nav-link py-1 px-2" href="search">
+                        <a [routerLink]="['user']" class="nav-link py-1 px-2" *ngIf="FO_rol == 3 || FO_rol == 4">
                             <i class="pe-1">
                                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" height="6" width="6">
                                     <path 
                                     d="M502.6 278.6c12.5-12.5 12.5-32.8 0-45.3l-128-128c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L402.7 224 192 224c-17.7 0-32 14.3-32 32s14.3 32 32 32l210.7 0-73.4 73.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0l128-128zM160 96c17.7 0 32-14.3 32-32s-14.3-32-32-32L96 32C43 32 0 75 0 128L0 384c0 53 43 96 96 96l64 0c17.7 0 32-14.3 32-32s-14.3-32-32-32l-64 0c-17.7 0-32-14.3-32-32l0-256c0-17.7 14.3-32 32-32l64 0z"/>
                                 </svg>
                             </i>
-                            Consultar
+                            Gestionar Usuarios
                         </a>
-                        <a class="nav-link py-1 px-2" href="profile">
-                            <i class="pe-1">
-                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" height="6" width="6">
-                                    <path 
-                                    d="M502.6 278.6c12.5-12.5 12.5-32.8 0-45.3l-128-128c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L402.7 224 192 224c-17.7 0-32 14.3-32 32s14.3 32 32 32l210.7 0-73.4 73.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0l128-128zM160 96c17.7 0 32-14.3 32-32s-14.3-32-32-32L96 32C43 32 0 75 0 128L0 384c0 53 43 96 96 96l64 0c17.7 0 32-14.3 32-32s-14.3-32-32-32l-64 0c-17.7 0-32-14.3-32-32l0-256c0-17.7 14.3-32 32-32l64 0z"/>
-                                </svg>
-                            </i>
-                            Editar
-                        </a>
-                        <a class="nav-link py-1 px-2" href="delete">
-                            <i class="pe-1">
-                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" height="6" width="6">
-                                    <path 
-                                    d="M502.6 278.6c12.5-12.5 12.5-32.8 0-45.3l-128-128c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L402.7 224 192 224c-17.7 0-32 14.3-32 32s14.3 32 32 32l210.7 0-73.4 73.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0l128-128zM160 96c17.7 0 32-14.3 32-32s-14.3-32-32-32L96 32C43 32 0 75 0 128L0 384c0 53 43 96 96 96l64 0c17.7 0 32-14.3 32-32s-14.3-32-32-32l-64 0c-17.7 0-32-14.3-32-32l0-256c0-17.7 14.3-32 32-32l64 0z"/>
-                                </svg>
-                            </i>
-                            Eliminar
-                        </a>
-                        <a class="nav-link py-1 px-2" href="forgot-password">
+                        <a [routerLink]="['forgot-password']" class="nav-link py-1 px-2">
                             <i class="pe-1">
                                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" height="6" width="6">
                                     <path 
@@ -89,7 +71,7 @@
                 </div>
 
                 <!-- Accordion menu PRODUCTS -->
-                <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseProducts" aria-expanded="false" aria-controls="collapseProducts">
+                <a class="nav-link collapsed" data-bs-toggle="collapse" data-bs-target="#collapseProducts" aria-expanded="false" aria-controls="collapseProducts">
                     <div class="sb-nav-link-icon">
                         <i>
                             <svg xmlns="http://www.w3.org/2000/svg" height="18" width="18" viewBox="0 0 640 512">
@@ -110,7 +92,7 @@
                 </a>
                 <div class="collapse" id="collapseProducts" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
                     <nav class="sb-sidenav-menu-nested nav bg-white py-1 mx-5 mt-2 collapse-inner rounded">
-                        <a class="nav-link py-1" href="catalog">
+                        <a [routerLink]="['product']" class="nav-link py-1">
                             <i class="pe-1">
                                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" height="6" width="6">
                                     <path 
@@ -119,7 +101,7 @@
                             </i>
                             Inventario
                         </a>
-                        <a class="nav-link py-1" href="register_prod">
+                        <a [routerLink]="['register-product']" class="nav-link py-1" *ngIf="rol == 'Gestor de Bodega' || FO_rol == 3 || FO_rol == 4">
                             <i class="pe-1">
                                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" height="6" width="6">
                                     <path 
@@ -128,29 +110,29 @@
                             </i>
                             Registrar
                         </a>
-                        <a class="nav-link py-1" href="update_prod">
+                        <a [routerLink]="['mark']" class="nav-link py-1" *ngIf="rol == 'Gestor de Bodega' || FO_rol == 3 || FO_rol == 4">
                             <i class="pe-1">
                                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" height="6" width="6">
                                     <path 
                                     d="M502.6 278.6c12.5-12.5 12.5-32.8 0-45.3l-128-128c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L402.7 224 192 224c-17.7 0-32 14.3-32 32s14.3 32 32 32l210.7 0-73.4 73.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0l128-128zM160 96c17.7 0 32-14.3 32-32s-14.3-32-32-32L96 32C43 32 0 75 0 128L0 384c0 53 43 96 96 96l64 0c17.7 0 32-14.3 32-32s-14.3-32-32-32l-64 0c-17.7 0-32-14.3-32-32l0-256c0-17.7 14.3-32 32-32l64 0z"/>
                                 </svg>
                             </i>
-                            Actualizar Stock
+                            Gestionar marcas
                         </a>
-                        <a class="nav-link py-1" href="delete_prod">
+                        <a [routerLink]="['unity']" class="nav-link py-1" *ngIf="rol == 'Gestor de Bodega' || FO_rol == 3 || FO_rol == 4">
                             <i class="pe-1">
                                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" height="6" width="6">
                                     <path 
                                     d="M502.6 278.6c12.5-12.5 12.5-32.8 0-45.3l-128-128c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L402.7 224 192 224c-17.7 0-32 14.3-32 32s14.3 32 32 32l210.7 0-73.4 73.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0l128-128zM160 96c17.7 0 32-14.3 32-32s-14.3-32-32-32L96 32C43 32 0 75 0 128L0 384c0 53 43 96 96 96l64 0c17.7 0 32-14.3 32-32s-14.3-32-32-32l-64 0c-17.7 0-32-14.3-32-32l0-256c0-17.7 14.3-32 32-32l64 0z"/>
                                 </svg>
                             </i>
-                            Eliminar
+                            Gestionar unidades
                         </a>
                     </nav>
                 </div>
 
                 <!-- Accordion menu SALES -->
-                <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseSales" aria-expanded="false" aria-controls="collapseSales">
+                <a class="nav-link collapsed" data-bs-toggle="collapse" data-bs-target="#collapseSales" aria-expanded="false" aria-controls="collapseSales" *ngIf="rol == 'Vendedor' || FO_rol == 3 || FO_rol == 4">
                     <div class="sb-nav-link-icon">
                         <i>
                             <svg xmlns="http://www.w3.org/2000/svg" height="18" width="18" viewBox="0 0 448 512">
@@ -172,7 +154,7 @@
                 <div class="collapse" id="collapseSales" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
                     <nav class="sb-sidenav-menu-nested nav bg-white py-1 mx-5 mt-2 collapse-inner rounded">
                         <div class="sb-sidenav-menu-heading py-2">HISTORIAL:</div>
-                        <a class="nav-link py-1" href="register_sale">
+                        <a [routerLink]="['register-sale']" class="nav-link py-1">
                             <i class="pe-1">
                                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" height="6" width="6">
                                     <path 
@@ -181,7 +163,7 @@
                             </i>
                             Nueva Venta                            
                         </a>
-                        <a class="nav-link py-1" href="search_sale">
+                        <a [routerLink]="['sale']" class="nav-link py-1">
                             <i class="pe-1">
                                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" height="6" width="6">
                                     <path 
@@ -192,7 +174,7 @@
                         </a>
                         <div class="collapse-divider"></div>
                         <div class="sb-sidenav-menu-heading py-2 mt-2">DEVOLUCIONES:</div>
-                        <a class="nav-link py-1" href="register_devo">
+                        <a class="nav-link py-1" [routerLink]="['devolution']">
                             <i class="pe-1">
                                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" height="6" width="6">
                                     <path 
@@ -201,7 +183,7 @@
                             </i>
                             Nueva Devolución
                         </a>
-                        <a class="nav-link py-1" href="search_devo">
+                        <a class="nav-link py-1" [routerLink]="['devolution']">
                             <i class="pe-1">
                                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" height="6" width="6">
                                     <path 
@@ -210,11 +192,31 @@
                             </i>
                             Consultar Devoluciones
                         </a>
+                        <div class="collapse-divider"></div>
+                        <div class="sb-sidenav-menu-heading py-2 mt-2">CLIENTES:</div>
+                        <a [routerLink]="['register-client']" class="nav-link py-1">
+                            <i class="pe-1">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" height="6" width="6">
+                                    <path 
+                                    d="M502.6 278.6c12.5-12.5 12.5-32.8 0-45.3l-128-128c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L402.7 224 192 224c-17.7 0-32 14.3-32 32s14.3 32 32 32l210.7 0-73.4 73.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0l128-128zM160 96c17.7 0 32-14.3 32-32s-14.3-32-32-32L96 32C43 32 0 75 0 128L0 384c0 53 43 96 96 96l64 0c17.7 0 32-14.3 32-32s-14.3-32-32-32l-64 0c-17.7 0-32-14.3-32-32l0-256c0-17.7 14.3-32 32-32l64 0z"/>
+                                </svg>
+                            </i>
+                            Nuevo Cliente
+                        </a>
+                        <a [routerLink]="['client']" class="nav-link py-1">
+                            <i class="pe-1">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" height="6" width="6">
+                                    <path 
+                                    d="M502.6 278.6c12.5-12.5 12.5-32.8 0-45.3l-128-128c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L402.7 224 192 224c-17.7 0-32 14.3-32 32s14.3 32 32 32l210.7 0-73.4 73.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0l128-128zM160 96c17.7 0 32-14.3 32-32s-14.3-32-32-32L96 32C43 32 0 75 0 128L0 384c0 53 43 96 96 96l64 0c17.7 0 32-14.3 32-32s-14.3-32-32-32l-64 0c-17.7 0-32-14.3-32-32l0-256c0-17.7 14.3-32 32-32l64 0z"/>
+                                </svg>
+                            </i>
+                            Consultar Clientes
+                        </a>
                     </nav>
                 </div>
 
                 <!-- Accordion menu PURCHASES -->
-                <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapsePurchases" aria-expanded="false" aria-controls="collapsePurchases">
+                <a class="nav-link collapsed" data-bs-toggle="collapse" data-bs-target="#collapsePurchases" aria-expanded="false" aria-controls="collapsePurchases" *ngIf="rol == 'Gestor de Bodega' || FO_rol == 3 || FO_rol == 4">
                     <div class="sb-nav-link-icon">
                         <i>
                             <svg xmlns="http://www.w3.org/2000/svg" height="18" width="18" viewBox="0 0 576 512">
@@ -223,7 +225,7 @@
                             </svg>
                         </i>
                     </div>
-                    Compras
+                    Suministros
                     <div class="sb-sidenav-collapse-arrow">
                         <i>
                             <svg xmlns="http://www.w3.org/2000/svg" height="18" width="18" viewBox="0 0 448 512">
@@ -236,27 +238,27 @@
                 <div class="collapse" id="collapsePurchases" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
                     <nav class="sb-sidenav-menu-nested nav bg-white py-1 mx-5 mt-2 collapse-inner rounded">
                         <div class="sb-sidenav-menu-heading py-2">HISTORIAL:</div>
-                        <a class="nav-link py-1" href="register_purch">
+                        <a [routerLink]="['register-purchase']" class="nav-link py-1" *ngIf="FO_rol == 3 || FO_rol == 4">
                             <i class="pe-1">
                                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" height="6" width="6">
                                     <path 
                                     d="M502.6 278.6c12.5-12.5 12.5-32.8 0-45.3l-128-128c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L402.7 224 192 224c-17.7 0-32 14.3-32 32s14.3 32 32 32l210.7 0-73.4 73.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0l128-128zM160 96c17.7 0 32-14.3 32-32s-14.3-32-32-32L96 32C43 32 0 75 0 128L0 384c0 53 43 96 96 96l64 0c17.7 0 32-14.3 32-32s-14.3-32-32-32l-64 0c-17.7 0-32-14.3-32-32l0-256c0-17.7 14.3-32 32-32l64 0z"/>
                                 </svg>
                             </i>
-                            Nueva Compra
+                            Nueva Orden
                         </a>
-                        <a class="nav-link py-1" href="search_purch">
+                        <a [routerLink]="['purchase']" class="nav-link py-1">
                             <i class="pe-1">
                                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" height="6" width="6">
                                     <path 
                                     d="M502.6 278.6c12.5-12.5 12.5-32.8 0-45.3l-128-128c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L402.7 224 192 224c-17.7 0-32 14.3-32 32s14.3 32 32 32l210.7 0-73.4 73.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0l128-128zM160 96c17.7 0 32-14.3 32-32s-14.3-32-32-32L96 32C43 32 0 75 0 128L0 384c0 53 43 96 96 96l64 0c17.7 0 32-14.3 32-32s-14.3-32-32-32l-64 0c-17.7 0-32-14.3-32-32l0-256c0-17.7 14.3-32 32-32l64 0z"/>
                                 </svg>
                             </i>
-                            Consultar Compras
+                            Consultar Ordenes
                         </a>
                         <div class="collapse-divider"></div>
                         <div class="sb-sidenav-menu-heading py-2 mt-2">PROVEEDOR:</div>
-                        <a class="nav-link py-1" href="register_prov">
+                        <a [routerLink]="['register-provider']" class="nav-link py-1" *ngIf="FO_rol == 3 || FO_rol == 4">
                             <i class="pe-1">
                                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" height="6" width="6">
                                     <path 
@@ -265,7 +267,7 @@
                             </i>
                             Nuevo Proveedor
                         </a>
-                        <a class="nav-link py-1" href="search_prov">
+                        <a [routerLink]="['provider']" class="nav-link py-1">
                             <i class="pe-1">
                                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" height="6" width="6">
                                     <path 
@@ -274,11 +276,29 @@
                             </i>
                             Consultar Proveedor
                         </a>
+                        <a [routerLink]="['city']" class="nav-link py-1" *ngIf="FO_rol == 3 || FO_rol == 4">
+                            <i class="pe-1">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" height="6" width="6">
+                                    <path 
+                                    d="M502.6 278.6c12.5-12.5 12.5-32.8 0-45.3l-128-128c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L402.7 224 192 224c-17.7 0-32 14.3-32 32s14.3 32 32 32l210.7 0-73.4 73.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0l128-128zM160 96c17.7 0 32-14.3 32-32s-14.3-32-32-32L96 32C43 32 0 75 0 128L0 384c0 53 43 96 96 96l64 0c17.7 0 32-14.3 32-32s-14.3-32-32-32l-64 0c-17.7 0-32-14.3-32-32l0-256c0-17.7 14.3-32 32-32l64 0z"/>
+                                </svg>
+                            </i>
+                            Gestionar Ciudades
+                        </a>
+                        <a [routerLink]="['department']" class="nav-link py-1" *ngIf="FO_rol == 3 || FO_rol == 4">
+                            <i class="pe-1">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" height="6" width="6">
+                                    <path 
+                                    d="M502.6 278.6c12.5-12.5 12.5-32.8 0-45.3l-128-128c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L402.7 224 192 224c-17.7 0-32 14.3-32 32s14.3 32 32 32l210.7 0-73.4 73.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0l128-128zM160 96c17.7 0 32-14.3 32-32s-14.3-32-32-32L96 32C43 32 0 75 0 128L0 384c0 53 43 96 96 96l64 0c17.7 0 32-14.3 32-32s-14.3-32-32-32l-64 0c-17.7 0-32-14.3-32-32l0-256c0-17.7 14.3-32 32-32l64 0z"/>
+                                </svg>
+                            </i>
+                            Gestionar Departamentos
+                        </a>
                     </nav>
                 </div>
 
                 <!-- Accordion menu REPORTS -->
-                <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseReports" aria-expanded="false" aria-controls="collapseReports">
+                <a class="nav-link collapsed" data-bs-toggle="collapse" data-bs-target="#collapseReports" aria-expanded="false" aria-controls="collapseReports" *ngIf="FO_rol == 3 || FO_rol == 4">
                     <div class="sb-nav-link-icon">
                         <i>
                             <svg xmlns="http://www.w3.org/2000/svg" height="18" width="18" viewBox="0 0 384 512">
@@ -307,7 +327,7 @@
                                     d="M502.6 278.6c12.5-12.5 12.5-32.8 0-45.3l-128-128c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L402.7 224 192 224c-17.7 0-32 14.3-32 32s14.3 32 32 32l210.7 0-73.4 73.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0l128-128zM160 96c17.7 0 32-14.3 32-32s-14.3-32-32-32L96 32C43 32 0 75 0 128L0 384c0 53 43 96 96 96l64 0c17.7 0 32-14.3 32-32s-14.3-32-32-32l-64 0c-17.7 0-32-14.3-32-32l0-256c0-17.7 14.3-32 32-32l64 0z"/>
                                 </svg>
                             </i>
-                            Crear Reporte_V
+                            Crear Reporte de Ventas
                         </a>
                         <div class="collapse-divider"></div>
                         <div class="sb-sidenav-menu-heading py-2 mt-2">COMPRAS:</div>
@@ -318,7 +338,7 @@
                                     d="M502.6 278.6c12.5-12.5 12.5-32.8 0-45.3l-128-128c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L402.7 224 192 224c-17.7 0-32 14.3-32 32s14.3 32 32 32l210.7 0-73.4 73.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0l128-128zM160 96c17.7 0 32-14.3 32-32s-14.3-32-32-32L96 32C43 32 0 75 0 128L0 384c0 53 43 96 96 96l64 0c17.7 0 32-14.3 32-32s-14.3-32-32-32l-64 0c-17.7 0-32-14.3-32-32l0-256c0-17.7 14.3-32 32-32l64 0z"/>
                                 </svg>
                             </i>
-                            Crear Reporte_C
+                            Crear Reporte de Compras
                         </a>
                         <div class="collapse-divider"></div>
                         <div class="sb-sidenav-menu-heading py-2 mt-2">EMPRESA:</div>
@@ -329,7 +349,7 @@
                                     d="M502.6 278.6c12.5-12.5 12.5-32.8 0-45.3l-128-128c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L402.7 224 192 224c-17.7 0-32 14.3-32 32s14.3 32 32 32l210.7 0-73.4 73.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0l128-128zM160 96c17.7 0 32-14.3 32-32s-14.3-32-32-32L96 32C43 32 0 75 0 128L0 384c0 53 43 96 96 96l64 0c17.7 0 32-14.3 32-32s-14.3-32-32-32l-64 0c-17.7 0-32-14.3-32-32l0-256c0-17.7 14.3-32 32-32l64 0z"/>
                                 </svg>
                             </i>
-                            Crear Reporte_E
+                            Crear Reporte General
                         </a>
                     </nav>
                 </div>
@@ -337,7 +357,7 @@
 
                 <!-- Menu HELP -->
                 <div class="sb-sidenav-menu-heading pt-3">Ayuda</div>
-                <a class="nav-link py-1" href="help">
+                <a class="nav-link py-1" [routerLink]="['help']">
                     <div class="sb-nav-link-icon">
                         <i>
                             <svg xmlns="http://www.w3.org/2000/svg" height="18" width="18" viewBox="0 0 512 512">
@@ -352,7 +372,8 @@
         </div>
         <div class="sb-sidenav-footer">
             <div class="small">Sesión iniciada como:</div>
-            ADMINISTRADOR
+            {{rol}}
+            <div class="small">Caja Asignada: {{" "+caja}}</div>
         </div>
     </nav>
 </div>

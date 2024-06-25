@@ -24,3 +24,11 @@ window.addEventListener('DOMContentLoaded', event => {
     }
 
 });
+
+function session_end(){
+    sessionStorage.setItem("id","") ;
+    sessionStorage.setItem("email","") ;
+    sessionStorage.setItem("nombre","") ;
+    sessionStorage.setItem("rol","") ;
+    sessionStorage.setItem("caja","") ;
+  };

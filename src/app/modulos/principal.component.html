@@ -6,10 +6,17 @@
     <app-nav></app-nav>
     <!-- Main content -->
     <div id="layoutSidenav_content">
-        <!-- Dashboard -->
-        <app-dashboard></app-dashboard>
+        <!-- Page Heading -->
+        <main>
+            <!-- Dashboard -->
+        <router-outlet></router-outlet>
+            <!-- End Dashboard -->
+        </main>
+        <!--hr class="sidebar-divider">
+        <!-- End Page Heading -->
         <!-- Footer -->
         <app-footer></app-footer>
+        <!-- End Footer -->
     </div>
 </div>
 <!-- End Sidebar - Page Main Content -->

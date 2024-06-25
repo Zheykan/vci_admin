@@ -233,6 +233,11 @@ small, .small {
   font-size: 0.875em;
 }
 
+strong, .strong {
+  font-size: 1.2em;
+  font-weight: bolder;
+}
+
 mark, .mark {
   padding: 0.1875em;
   background-color: var(--bs-highlight-bg);
@@ -447,6 +452,8 @@ legend + * {
 
 ::-webkit-inner-spin-button {
   height: auto;
+  -webkit-appearance: none;
+  margin: 0;
 }
 
 [type=search] {
@@ -2506,7 +2513,7 @@ textarea.form-control-lg {
   left: 0;
   width: 100%;
   height: 100%;
-  padding: 1rem 0.75rem;
+  padding: 0.5rem 1rem;
   overflow: hidden;
   text-align: start;
   text-overflow: ellipsis;
@@ -2533,27 +2540,27 @@ textarea.form-control-lg {
   color: transparent;
 }
 .form-floating > .form-control:not(:-moz-placeholder-shown), .form-floating > .datatable-input:not(:-moz-placeholder-shown), .form-floating > .form-control-plaintext:not(:-moz-placeholder-shown) {
-  padding-top: 1.625rem;
+  padding-top: 1rem;
   padding-bottom: 0.625rem;
 }
 .form-floating > .form-control:focus, .form-floating > .datatable-input:focus, .form-floating > .form-control:not(:placeholder-shown), .form-floating > .datatable-input:not(:placeholder-shown),
 .form-floating > .form-control-plaintext:focus,
 .form-floating > .form-control-plaintext:not(:placeholder-shown) {
-  padding-top: 1.625rem;
+  padding-top: 1rem;
   padding-bottom: 0.625rem;
 }
 .form-floating > .form-control:-webkit-autofill, .form-floating > .datatable-input:-webkit-autofill,
 .form-floating > .form-control-plaintext:-webkit-autofill {
-  padding-top: 1.625rem;
+  padding-top: 1rem;
   padding-bottom: 0.625rem;
 }
 .form-floating > .form-select, .form-floating > .datatable-selector {
-  padding-top: 1.625rem;
+  padding-top: 1rem;
   padding-bottom: 0.625rem;
 }
 .form-floating > .form-control:not(:-moz-placeholder-shown) ~ label, .form-floating > .datatable-input:not(:-moz-placeholder-shown) ~ label {
   opacity: 0.65;
-  transform: scale(0.85) translateY(-0.5rem) translateX(0.15rem);
+  transform: scale(1) translateY(-0.5rem) translateX(0.15rem);
 }
 .form-floating > .form-control:focus ~ label, .form-floating > .datatable-input:focus ~ label,
 .form-floating > .form-control:not(:placeholder-shown) ~ label,
@@ -2562,11 +2569,11 @@ textarea.form-control-lg {
 .form-floating > .form-select ~ label,
 .form-floating > .datatable-selector ~ label {
   opacity: 0.65;
-  transform: scale(0.85) translateY(-0.5rem) translateX(0.15rem);
+  transform: scale(1) translateY(-0.5rem) translateX(0.15rem);
 }
 .form-floating > .form-control:-webkit-autofill ~ label, .form-floating > .datatable-input:-webkit-autofill ~ label {
   opacity: 0.65;
-  transform: scale(0.85) translateY(-0.5rem) translateX(0.15rem);
+  transform: scale(1) translateY(-0.5rem) translateX(0.15rem);
 }
 .form-floating > .form-control-plaintext ~ label {
   border-width: 1px 0;
@@ -7160,7 +7167,7 @@ textarea.form-control-lg {
 }
 
 .shadow-lg {
-  box-shadow: 0 1rem 3rem rgba(0, 0, 0, 0.175) !important;
+  box-shadow: 0 2rem 3rem rgba(0, 0, 0, 0.375) !important;
 }
 
 .shadow-none {
@@ -7189,6 +7196,26 @@ textarea.form-control-lg {
 
 .top-0 {
   top: 0 !important;
+}
+
+.top-5 {
+  top: 5% !important;
+}
+
+.top-10 {
+  top: 10% !important;
+}
+
+.top-15 {
+  top: 15% !important;
+}
+
+.top-20 {
+  top: 20% !important;
+}
+
+.top-25 {
+  top: 25% !important;
 }
 
 .top-50 {
@@ -7225,6 +7252,10 @@ textarea.form-control-lg {
 
 .end-0 {
   right: 0 !important;
+}
+
+.end-1 {
+  right: 1% !important;
 }
 
 .end-50 {
@@ -8295,16 +8326,31 @@ textarea.form-control-lg {
   background-color: rgba(var(--bs-white-rgb), var(--bs-bg-opacity)) !important;
 }
 
-.bg-gradient-secondary { 
+.bg-gradient-secondary {
+  height: 100%; 
   background-color:#F0F9F8;
   background-image:linear-gradient(120deg,#87ceea 20%,#F0F9F8 55%);
-  background-size:cover
+  background-size: cover;
+}
+
+.bg-gradient-second-section {
+  height: 100%; 
+  background-color:#F0F9F8;
+  background-image:linear-gradient(170deg,#87ceea 20%,#FFFFFF 55%);
+  background-size: cover;
+}
+
+.bg-gradient-third-section {
+  height: 100%; 
+  background-color:#F0F9F8;
+  background-image:linear-gradient(200deg,#87ceea 20%,#FFFFFF 55%);
+  background-size: cover;
 }
 
 .bg-gradient-tertiary {
   background-color:#F0F9F8;
   background-image:linear-gradient(120deg,#87ceea 0%, #F0F9F8 30%, #F0F9F8 60%, #87ceea 99%);
-  background-size:cover
+  background-size: cover;
 }
 
 .bg-body {
@@ -8341,6 +8387,12 @@ textarea.form-control-lg {
   background-image: var(--bs-gradient) !important;
 }
 
+.bg-client-image {
+  background:url("https://images.unsplash.com/photo-1556740738-b6a63e27c4df?q=80&w=1740&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D/600x800");
+  background-position:center;
+  background-size:cover
+}
+
 .bg-login-image {
   background:url("https://images.unsplash.com/photo-1534723452862-4c874018d66d?q=80&w=1740&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D/600x800");
   background-position:center;
@@ -8355,6 +8407,18 @@ textarea.form-control-lg {
 
 .bg-password-image {
   background:url("https://images.unsplash.com/photo-1633265486064-086b219458ec?q=80&w=1740&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D/600x800");
+  background-position:center;
+  background-size:cover;
+}
+
+.bg-product-image {
+  background:url("https://images.unsplash.com/photo-1648824572347-517357c9c44e?q=80&w=1812&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D/600x800");
+  background-position:center;
+  background-size:cover;
+}
+
+.bg-purchase-image {
+  background:url("https://images.unsplash.com/photo-1607977027972-e2aae2b5b1e0?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8c3VtaW5pc3Ryb3N8ZW58MHx8MHx8fDI%3D/600x800");
   background-position:center;
   background-size:cover;
 }
@@ -8374,6 +8438,23 @@ form.user .form-control-user {
 }
 
 form.user .btn-user {
+  font-size: 1rem;
+  font-weight: 500;
+  border-radius: 10rem;
+  padding: 0.75rem 1rem;
+}
+
+div.user .custom-checkbox.small label {
+  line-height: 1.5rem;
+}
+
+div.user .form-control-user {
+  font-size: 1.1rem;
+  border-radius: 10rem;
+  padding: 1.5rem 1rem;
+}
+
+div.user .btn-user {
   font-size: 1rem;
   font-weight: 500;
   border-radius: 10rem;
@@ -11372,6 +11453,9 @@ body {
   flex-direction: column;
   height: 100vh;
   flex-wrap: nowrap;
+  border-right-style: groove;
+  border-width: 1px;
+  border-color: #2c3034;
 }
 .sb-sidenav .sb-sidenav-menu {
   flex-grow: 1;
@@ -11636,4 +11720,11 @@ body {
   width: 20px !important;
   font-size: 0.75rem;
   border-radius: 0.375rem !important;
+}
+
+.span-alert {
+  line-height: 1;
+  font-size: 0.8rem;
+  color: #ff4444;
+  position: relative;
 }
