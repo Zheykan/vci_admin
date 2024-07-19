@@ -11,7 +11,7 @@ export class LoginComponent {
   
   email: any ;
   passwd: any ;
-  log_error = false ;
+  log_error = true ;
   user: any ;
   log_user = {
     id_usuario : 0 ,
@@ -33,8 +33,8 @@ export class LoginComponent {
     sessionStorage.setItem("caja","") ;
   }
 
-  consulta(press: any){
-    if (press == 13 || press == "") {
+  consulta(){
+    
       this.slogin.consulta(this.email, this.passwd).subscribe((resultado : any) =>
       { this.user = resultado;
         if(this.user[0].access == "granted"){
@@ -44,12 +44,20 @@ export class LoginComponent {
           sessionStorage.setItem("FO_rol",this.user[0]['FO_rol']) ;
           sessionStorage.setItem("rol",this.user[0]['rol']) ;
           sessionStorage.setItem("caja",this.user[0]['caja']) ;
-          this.srouter.navigate(['/dashboard']) ;
+          this.srouter.navigate(['dashboard']) ;
+          this.recarga() ;
+          //for (let cont = 0; cont < 1; cont++) {
+            //parent.window.location.reload();
+          //}
         }else {
           console.log("Acceso denegado!") ;
-          this.log_error = true ;
-        }
-      })
-    }
+          this.log_error = false ;
+        }})
   }
+
+  recarga () {
+    // modificando la direccion de la localizacion refresca y redirige a la seccion indicada
+    window.location.href  = "http://localhost:4200/dashboard";
+    setInterval("location.reload()",200);
+}
 }

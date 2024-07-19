@@ -99,6 +99,11 @@ export class MarkComponent {
           text: "¡Este registro de marca ha sido eliminado!",
           icon: "success"
         });
+        this.smark.eliminar(id).subscribe((datos: any) => {
+          if(datos['resultado'] == 'OK'){
+            this.consulta() ;
+          }
+        }) ;
       } else if (
         /* Read more about handling dismissals below */
         result.dismiss === Swal.DismissReason.cancel
@@ -110,12 +115,5 @@ export class MarkComponent {
         });
       }
     });
-
-    this.smark.eliminar(id).subscribe((datos: any) => 
-    {
-      if(datos['resultado'] == 'OK'){
-        this.consulta() ;
-      }
-    }) ;
   }
 }

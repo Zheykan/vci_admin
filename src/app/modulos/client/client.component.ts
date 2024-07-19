@@ -30,6 +30,7 @@ export class ClientComponent {
   validate_mail = true ;
   validate_dir = true ;
   most_edit = false ;
+  most_busq = false ;
   
   constructor(private sclient: ClienteService){}
   ngOnInit(): void{
@@ -54,6 +55,19 @@ export class ClientComponent {
       break ;
     }
     this.limpiar() ;
+  }
+
+  mostrar_busq(dato: any){
+    switch(dato){
+      case "mostrar":
+        this.most_busq = true ;
+        this.most_edit = false ;
+      break ;
+      case "ocultar":
+        this.most_busq = false ;
+      break ;
+    }
+    this.dato = "" ;
   }
 
   limpiar(){

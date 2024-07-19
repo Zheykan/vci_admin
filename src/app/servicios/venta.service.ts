@@ -13,11 +13,23 @@ export class VentaService {
    consultar(){
      return this.http.get(`${this.url}?control=consulta`) ;
    }
+   maximo(){
+    return this.http.get(`${this.url}?control=max`) ;
+   }
+   total(){
+    return this.http.get(`${this.url}?control=calculart`) ;
+   }
+   conteo(){
+    return this.http.get(`${this.url}?control=conteo`) ;
+   }
    insertar(params:any){
      return this.http.post(`${this.url}?control=insertar`, JSON.stringify(params)) ;
    }
    editar(id:number, params:any){
      return this.http.post(`${this.url}?control=editar&id=${id}`, JSON.stringify(params)) ;
+   }
+   expand(id:number){
+    return this.http.get(`${this.url}?control=expand&id=${id}`) ;
    }
    eliminar(id:number){
      return this.http.get(`${this.url}?control=eliminar&id=${id}`) ;
@@ -25,4 +37,7 @@ export class VentaService {
    filtro(valor:any){
      return this.http.get(`${this.url}?control=filtrar&valor=${valor}`) ;
    }
+   found(id:number){
+    return this.http.get(`${this.url}?control=found&id=${id}`) ;
+  }
 }

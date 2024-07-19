@@ -51,511 +51,117 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-xl-6">
+            <div class="col-xl-4">
                 <div class="card mb-4">
                     <div class="card-header">
-                        <i class="fas fa-chart-area me-1"></i>
-                        Area Chart Example
+                        <i class="me-1">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" height="25" width="25">
+                                <path 
+                                d="M64 0C46.3 0 32 14.3 32 32l0 64c0 17.7 14.3 32 32 32l80 0 0 32-57 0c-31.6 0-58.5 23.1-63.3 54.4L1.1 364.1C.4 368.8 0 373.6 0 378.4L0 448c0 35.3 28.7 64 64 64l384 0c35.3 0 64-28.7 64-64l0-69.6c0-4.8-.4-9.6-1.1-14.4L488.2 214.4C483.5 183.1 456.6 160 425 160l-217 0 0-32 80 0c17.7 0 32-14.3 32-32l0-64c0-17.7-14.3-32-32-32L64 0zM96 48l160 0c8.8 0 16 7.2 16 16s-7.2 16-16 16L96 80c-8.8 0-16-7.2-16-16s7.2-16 16-16zM64 432c0-8.8 7.2-16 16-16l352 0c8.8 0 16 7.2 16 16s-7.2 16-16 16L80 448c-8.8 0-16-7.2-16-16zm48-168a24 24 0 1 1 0-48 24 24 0 1 1 0 48zm120-24a24 24 0 1 1 -48 0 24 24 0 1 1 48 0zM160 344a24 24 0 1 1 0-48 24 24 0 1 1 0 48zM328 240a24 24 0 1 1 -48 0 24 24 0 1 1 48 0zM256 344a24 24 0 1 1 0-48 24 24 0 1 1 0 48zM424 240a24 24 0 1 1 -48 0 24 24 0 1 1 48 0zM352 344a24 24 0 1 1 0-48 24 24 0 1 1 0 48z"/>
+                            </svg>
+                        </i>
+                        Detalles de Ventas e Inventario.
                     </div>
-                    <div class="card-body"><canvas id="myAreaChart" width="100%" height="40"></canvas></div>
+                    <div class="card-body">
+                        <!-- llenar con info de ventas y productos -->
+                        <div class="form-group row">
+                            <div class="col-sm-12 mb-3 px-3 mb-sm-0 d-inline-flex align-items-center">
+                                <label for="ultima_venta">Ultima Venta realizada:</label>
+                                <p class="ms-3 form-control form-control-user mt-3 text-danger" id="ultima_venta">
+                                <strong>{{last_v}}</strong>
+                                </p>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-sm-12 mb-3 px-3 mb-sm-0 d-inline-flex align-items-center">
+                                <label for="total_venta">Total general de ventas:</label>
+                                <p class="ms-3 form-control form-control-user mt-3 text-success" id="total_venta">
+                                <strong>{{total_ventas | currency}}</strong>
+                                </p>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-sm-12 mb-3 px-3 mb-sm-0 d-inline-flex align-items-center">
+                                <label for="producto_cant">Productos registrados:</label>
+                                <p class="ms-3 form-control form-control-user mt-3 text-primary" id="producto_cant">
+                                <strong>{{conteo}}</strong>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
-            <div class="col-xl-6">
+            <div class="col-xl-4">
                 <div class="card mb-4">
                     <div class="card-header">
-                        <i class="fas fa-chart-bar me-1"></i>
-                        Bar Chart Example
+                        <i class="me-1">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" height="25" width="25">
+                                <path 
+                                d="M64 32C28.7 32 0 60.7 0 96L0 416c0 35.3 28.7 64 64 64l448 0c35.3 0 64-28.7 64-64l0-320c0-35.3-28.7-64-64-64L64 32zm80 256l64 0c44.2 0 80 35.8 80 80c0 8.8-7.2 16-16 16L80 384c-8.8 0-16-7.2-16-16c0-44.2 35.8-80 80-80zm-32-96a64 64 0 1 1 128 0 64 64 0 1 1 -128 0zm256-32l128 0c8.8 0 16 7.2 16 16s-7.2 16-16 16l-128 0c-8.8 0-16-7.2-16-16s7.2-16 16-16zm0 64l128 0c8.8 0 16 7.2 16 16s-7.2 16-16 16l-128 0c-8.8 0-16-7.2-16-16s7.2-16 16-16zm0 64l128 0c8.8 0 16 7.2 16 16s-7.2 16-16 16l-128 0c-8.8 0-16-7.2-16-16s7.2-16 16-16z"/>
+                            </svg>
+                        </i>
+                        Detalles de Empleados.
                     </div>
-                    <div class="card-body"><canvas id="myBarChart" width="100%" height="40"></canvas></div>
+                    <div class="card-body">
+                        <!-- llenar con info de empleados -->
+                        <div class="form-group row">
+                            <div class="col-sm-12 mb-3 px-3 mb-sm-0 d-inline-flex align-items-center">
+                                <label for="vendedores">Usuarios Vendedor:</label>
+                                <p class="ms-3 form-control form-control-user mt-3 text-secondary" id="vendedores">
+                                <strong>{{conteo_v}}</strong>
+                                </p>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-sm-12 mb-3 px-3 mb-sm-0 d-inline-flex align-items-center">
+                                <label for="gestores">Usuarios Gestor de bodega:</label>
+                                <p class="ms-3 form-control form-control-user mt-3 text-secondary" id="gestores">
+                                <strong>{{conteo_b}}</strong>
+                                </p>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-sm-12 mb-3 px-3 mb-sm-0 d-inline-flex align-items-center">
+                                <label for="soportes">Usuarios Soporte técnico:</label>
+                                <p class="ms-3 form-control form-control-user mt-3 text-secondary" id="soportes">
+                                <strong>{{conteo_s}}</strong>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
-        </div>
-        <div class="card mb-4">
-            <div class="card-header">
-                <i class="fas fa-table me-1"></i>
-                DataTable Example
-            </div>
-            <div class="card-body">
-                <table id="datatablesSimple">
-                    <thead>
-                        <tr>
-                            <th>Name</th>
-                            <th>Position</th>
-                            <th>Office</th>
-                            <th>Age</th>
-                            <th>Start date</th>
-                            <th>Salary</th>
-                        </tr>
-                    </thead>
-                    <tfoot>
-                        <tr>
-                            <th>Name</th>
-                            <th>Position</th>
-                            <th>Office</th>
-                            <th>Age</th>
-                            <th>Start date</th>
-                            <th>Salary</th>
-                        </tr>
-                    </tfoot>
-                    <tbody>
-                        <tr>
-                            <td>Tiger Nixon</td>
-                            <td>System Architect</td>
-                            <td>Edinburgh</td>
-                            <td>61</td>
-                            <td>2011/04/25</td>
-                            <td>$320,800</td>
-                        </tr>
-                        <tr>
-                            <td>Garrett Winters</td>
-                            <td>Accountant</td>
-                            <td>Tokyo</td>
-                            <td>63</td>
-                            <td>2011/07/25</td>
-                            <td>$170,750</td>
-                        </tr>
-                        <tr>
-                            <td>Ashton Cox</td>
-                            <td>Junior Technical Author</td>
-                            <td>San Francisco</td>
-                            <td>66</td>
-                            <td>2009/01/12</td>
-                            <td>$86,000</td>
-                        </tr>
-                        <tr>
-                            <td>Cedric Kelly</td>
-                            <td>Senior Javascript Developer</td>
-                            <td>Edinburgh</td>
-                            <td>22</td>
-                            <td>2012/03/29</td>
-                            <td>$433,060</td>
-                        </tr>
-                        <tr>
-                            <td>Airi Satou</td>
-                            <td>Accountant</td>
-                            <td>Tokyo</td>
-                            <td>33</td>
-                            <td>2008/11/28</td>
-                            <td>$162,700</td>
-                        </tr>
-                        <tr>
-                            <td>Brielle Williamson</td>
-                            <td>Integration Specialist</td>
-                            <td>New York</td>
-                            <td>61</td>
-                            <td>2012/12/02</td>
-                            <td>$372,000</td>
-                        </tr>
-                        <tr>
-                            <td>Herrod Chandler</td>
-                            <td>Sales Assistant</td>
-                            <td>San Francisco</td>
-                            <td>59</td>
-                            <td>2012/08/06</td>
-                            <td>$137,500</td>
-                        </tr>
-                        <tr>
-                            <td>Rhona Davidson</td>
-                            <td>Integration Specialist</td>
-                            <td>Tokyo</td>
-                            <td>55</td>
-                            <td>2010/10/14</td>
-                            <td>$327,900</td>
-                        </tr>
-                        <tr>
-                            <td>Colleen Hurst</td>
-                            <td>Javascript Developer</td>
-                            <td>San Francisco</td>
-                            <td>39</td>
-                            <td>2009/09/15</td>
-                            <td>$205,500</td>
-                        </tr>
-                        <tr>
-                            <td>Sonya Frost</td>
-                            <td>Software Engineer</td>
-                            <td>Edinburgh</td>
-                            <td>23</td>
-                            <td>2008/12/13</td>
-                            <td>$103,600</td>
-                        </tr>
-                        <tr>
-                            <td>Jena Gaines</td>
-                            <td>Office Manager</td>
-                            <td>London</td>
-                            <td>30</td>
-                            <td>2008/12/19</td>
-                            <td>$90,560</td>
-                        </tr>
-                        <tr>
-                            <td>Quinn Flynn</td>
-                            <td>Support Lead</td>
-                            <td>Edinburgh</td>
-                            <td>22</td>
-                            <td>2013/03/03</td>
-                            <td>$342,000</td>
-                        </tr>
-                        <tr>
-                            <td>Charde Marshall</td>
-                            <td>Regional Director</td>
-                            <td>San Francisco</td>
-                            <td>36</td>
-                            <td>2008/10/16</td>
-                            <td>$470,600</td>
-                        </tr>
-                        <tr>
-                            <td>Haley Kennedy</td>
-                            <td>Senior Marketing Designer</td>
-                            <td>London</td>
-                            <td>43</td>
-                            <td>2012/12/18</td>
-                            <td>$313,500</td>
-                        </tr>
-                        <tr>
-                            <td>Tatyana Fitzpatrick</td>
-                            <td>Regional Director</td>
-                            <td>London</td>
-                            <td>19</td>
-                            <td>2010/03/17</td>
-                            <td>$385,750</td>
-                        </tr>
-                        <tr>
-                            <td>Michael Silva</td>
-                            <td>Marketing Designer</td>
-                            <td>London</td>
-                            <td>66</td>
-                            <td>2012/11/27</td>
-                            <td>$198,500</td>
-                        </tr>
-                        <tr>
-                            <td>Paul Byrd</td>
-                            <td>Chief Financial Officer (CFO)</td>
-                            <td>New York</td>
-                            <td>64</td>
-                            <td>2010/06/09</td>
-                            <td>$725,000</td>
-                        </tr>
-                        <tr>
-                            <td>Gloria Little</td>
-                            <td>Systems Administrator</td>
-                            <td>New York</td>
-                            <td>59</td>
-                            <td>2009/04/10</td>
-                            <td>$237,500</td>
-                        </tr>
-                        <tr>
-                            <td>Bradley Greer</td>
-                            <td>Software Engineer</td>
-                            <td>London</td>
-                            <td>41</td>
-                            <td>2012/10/13</td>
-                            <td>$132,000</td>
-                        </tr>
-                        <tr>
-                            <td>Dai Rios</td>
-                            <td>Personnel Lead</td>
-                            <td>Edinburgh</td>
-                            <td>35</td>
-                            <td>2012/09/26</td>
-                            <td>$217,500</td>
-                        </tr>
-                        <tr>
-                            <td>Jenette Caldwell</td>
-                            <td>Development Lead</td>
-                            <td>New York</td>
-                            <td>30</td>
-                            <td>2011/09/03</td>
-                            <td>$345,000</td>
-                        </tr>
-                        <tr>
-                            <td>Yuri Berry</td>
-                            <td>Chief Marketing Officer (CMO)</td>
-                            <td>New York</td>
-                            <td>40</td>
-                            <td>2009/06/25</td>
-                            <td>$675,000</td>
-                        </tr>
-                        <tr>
-                            <td>Caesar Vance</td>
-                            <td>Pre-Sales Support</td>
-                            <td>New York</td>
-                            <td>21</td>
-                            <td>2011/12/12</td>
-                            <td>$106,450</td>
-                        </tr>
-                        <tr>
-                            <td>Doris Wilder</td>
-                            <td>Sales Assistant</td>
-                            <td>Sidney</td>
-                            <td>23</td>
-                            <td>2010/09/20</td>
-                            <td>$85,600</td>
-                        </tr>
-                        <tr>
-                            <td>Angelica Ramos</td>
-                            <td>Chief Executive Officer (CEO)</td>
-                            <td>London</td>
-                            <td>47</td>
-                            <td>2009/10/09</td>
-                            <td>$1,200,000</td>
-                        </tr>
-                        <tr>
-                            <td>Gavin Joyce</td>
-                            <td>Developer</td>
-                            <td>Edinburgh</td>
-                            <td>42</td>
-                            <td>2010/12/22</td>
-                            <td>$92,575</td>
-                        </tr>
-                        <tr>
-                            <td>Jennifer Chang</td>
-                            <td>Regional Director</td>
-                            <td>Singapore</td>
-                            <td>28</td>
-                            <td>2010/11/14</td>
-                            <td>$357,650</td>
-                        </tr>
-                        <tr>
-                            <td>Brenden Wagner</td>
-                            <td>Software Engineer</td>
-                            <td>San Francisco</td>
-                            <td>28</td>
-                            <td>2011/06/07</td>
-                            <td>$206,850</td>
-                        </tr>
-                        <tr>
-                            <td>Fiona Green</td>
-                            <td>Chief Operating Officer (COO)</td>
-                            <td>San Francisco</td>
-                            <td>48</td>
-                            <td>2010/03/11</td>
-                            <td>$850,000</td>
-                        </tr>
-                        <tr>
-                            <td>Shou Itou</td>
-                            <td>Regional Marketing</td>
-                            <td>Tokyo</td>
-                            <td>20</td>
-                            <td>2011/08/14</td>
-                            <td>$163,000</td>
-                        </tr>
-                        <tr>
-                            <td>Michelle House</td>
-                            <td>Integration Specialist</td>
-                            <td>Sidney</td>
-                            <td>37</td>
-                            <td>2011/06/02</td>
-                            <td>$95,400</td>
-                        </tr>
-                        <tr>
-                            <td>Suki Burks</td>
-                            <td>Developer</td>
-                            <td>London</td>
-                            <td>53</td>
-                            <td>2009/10/22</td>
-                            <td>$114,500</td>
-                        </tr>
-                        <tr>
-                            <td>Prescott Bartlett</td>
-                            <td>Technical Author</td>
-                            <td>London</td>
-                            <td>27</td>
-                            <td>2011/05/07</td>
-                            <td>$145,000</td>
-                        </tr>
-                        <tr>
-                            <td>Gavin Cortez</td>
-                            <td>Team Leader</td>
-                            <td>San Francisco</td>
-                            <td>22</td>
-                            <td>2008/10/26</td>
-                            <td>$235,500</td>
-                        </tr>
-                        <tr>
-                            <td>Martena Mccray</td>
-                            <td>Post-Sales support</td>
-                            <td>Edinburgh</td>
-                            <td>46</td>
-                            <td>2011/03/09</td>
-                            <td>$324,050</td>
-                        </tr>
-                        <tr>
-                            <td>Unity Butler</td>
-                            <td>Marketing Designer</td>
-                            <td>San Francisco</td>
-                            <td>47</td>
-                            <td>2009/12/09</td>
-                            <td>$85,675</td>
-                        </tr>
-                        <tr>
-                            <td>Howard Hatfield</td>
-                            <td>Office Manager</td>
-                            <td>San Francisco</td>
-                            <td>51</td>
-                            <td>2008/12/16</td>
-                            <td>$164,500</td>
-                        </tr>
-                        <tr>
-                            <td>Hope Fuentes</td>
-                            <td>Secretary</td>
-                            <td>San Francisco</td>
-                            <td>41</td>
-                            <td>2010/02/12</td>
-                            <td>$109,850</td>
-                        </tr>
-                        <tr>
-                            <td>Vivian Harrell</td>
-                            <td>Financial Controller</td>
-                            <td>San Francisco</td>
-                            <td>62</td>
-                            <td>2009/02/14</td>
-                            <td>$452,500</td>
-                        </tr>
-                        <tr>
-                            <td>Timothy Mooney</td>
-                            <td>Office Manager</td>
-                            <td>London</td>
-                            <td>37</td>
-                            <td>2008/12/11</td>
-                            <td>$136,200</td>
-                        </tr>
-                        <tr>
-                            <td>Jackson Bradshaw</td>
-                            <td>Director</td>
-                            <td>New York</td>
-                            <td>65</td>
-                            <td>2008/09/26</td>
-                            <td>$645,750</td>
-                        </tr>
-                        <tr>
-                            <td>Olivia Liang</td>
-                            <td>Support Engineer</td>
-                            <td>Singapore</td>
-                            <td>64</td>
-                            <td>2011/02/03</td>
-                            <td>$234,500</td>
-                        </tr>
-                        <tr>
-                            <td>Bruno Nash</td>
-                            <td>Software Engineer</td>
-                            <td>London</td>
-                            <td>38</td>
-                            <td>2011/05/03</td>
-                            <td>$163,500</td>
-                        </tr>
-                        <tr>
-                            <td>Sakura Yamamoto</td>
-                            <td>Support Engineer</td>
-                            <td>Tokyo</td>
-                            <td>37</td>
-                            <td>2009/08/19</td>
-                            <td>$139,575</td>
-                        </tr>
-                        <tr>
-                            <td>Thor Walton</td>
-                            <td>Developer</td>
-                            <td>New York</td>
-                            <td>61</td>
-                            <td>2013/08/11</td>
-                            <td>$98,540</td>
-                        </tr>
-                        <tr>
-                            <td>Finn Camacho</td>
-                            <td>Support Engineer</td>
-                            <td>San Francisco</td>
-                            <td>47</td>
-                            <td>2009/07/07</td>
-                            <td>$87,500</td>
-                        </tr>
-                        <tr>
-                            <td>Serge Baldwin</td>
-                            <td>Data Coordinator</td>
-                            <td>Singapore</td>
-                            <td>64</td>
-                            <td>2012/04/09</td>
-                            <td>$138,575</td>
-                        </tr>
-                        <tr>
-                            <td>Zenaida Frank</td>
-                            <td>Software Engineer</td>
-                            <td>New York</td>
-                            <td>63</td>
-                            <td>2010/01/04</td>
-                            <td>$125,250</td>
-                        </tr>
-                        <tr>
-                            <td>Zorita Serrano</td>
-                            <td>Software Engineer</td>
-                            <td>San Francisco</td>
-                            <td>56</td>
-                            <td>2012/06/01</td>
-                            <td>$115,000</td>
-                        </tr>
-                        <tr>
-                            <td>Jennifer Acosta</td>
-                            <td>Junior Javascript Developer</td>
-                            <td>Edinburgh</td>
-                            <td>43</td>
-                            <td>2013/02/01</td>
-                            <td>$75,650</td>
-                        </tr>
-                        <tr>
-                            <td>Cara Stevens</td>
-                            <td>Sales Assistant</td>
-                            <td>New York</td>
-                            <td>46</td>
-                            <td>2011/12/06</td>
-                            <td>$145,600</td>
-                        </tr>
-                        <tr>
-                            <td>Hermione Butler</td>
-                            <td>Regional Director</td>
-                            <td>London</td>
-                            <td>47</td>
-                            <td>2011/03/21</td>
-                            <td>$356,250</td>
-                        </tr>
-                        <tr>
-                            <td>Lael Greer</td>
-                            <td>Systems Administrator</td>
-                            <td>London</td>
-                            <td>21</td>
-                            <td>2009/02/27</td>
-                            <td>$103,500</td>
-                        </tr>
-                        <tr>
-                            <td>Jonas Alexander</td>
-                            <td>Developer</td>
-                            <td>San Francisco</td>
-                            <td>30</td>
-                            <td>2010/07/14</td>
-                            <td>$86,500</td>
-                        </tr>
-                        <tr>
-                            <td>Shad Decker</td>
-                            <td>Regional Director</td>
-                            <td>Edinburgh</td>
-                            <td>51</td>
-                            <td>2008/11/13</td>
-                            <td>$183,000</td>
-                        </tr>
-                        <tr>
-                            <td>Michael Bruce</td>
-                            <td>Javascript Developer</td>
-                            <td>Singapore</td>
-                            <td>29</td>
-                            <td>2011/06/27</td>
-                            <td>$183,000</td>
-                        </tr>
-                        <tr>
-                            <td>Donna Snider</td>
-                            <td>Customer Support</td>
-                            <td>New York</td>
-                            <td>27</td>
-                            <td>2011/01/25</td>
-                            <td>$112,000</td>
-                        </tr>
-                    </tbody>
-                </table>
+            <div class="col-xl-4">
+                <div class="card mb-4">
+                    <div class="card-header">
+                        <i class="me-1">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" height="25" width="25">
+                                <path 
+                                d="M253.3 35.1c6.1-11.8 1.5-26.3-10.2-32.4s-26.3-1.5-32.4 10.2L117.6 192 32 192c-17.7 0-32 14.3-32 32s14.3 32 32 32L83.9 463.5C91 492 116.6 512 146 512L430 512c29.4 0 55-20 62.1-48.5L544 256c17.7 0 32-14.3 32-32s-14.3-32-32-32l-85.6 0L365.3 12.9C359.2 1.2 344.7-3.4 332.9 2.7s-16.3 20.6-10.2 32.4L404.3 192l-232.6 0L253.3 35.1zM192 304l0 96c0 8.8-7.2 16-16 16s-16-7.2-16-16l0-96c0-8.8 7.2-16 16-16s16 7.2 16 16zm96-16c8.8 0 16 7.2 16 16l0 96c0 8.8-7.2 16-16 16s-16-7.2-16-16l0-96c0-8.8 7.2-16 16-16zm128 16l0 96c0 8.8-7.2 16-16 16s-16-7.2-16-16l0-96c0-8.8 7.2-16 16-16s16 7.2 16 16z"/>
+                            </svg>
+                        </i>
+                        Detalles de los Suministros.
+                    </div>
+                    <div class="card-body">
+                        <!-- llenar con info de compras -->
+                        <div class="form-group row">
+                            <div class="col-sm-12 mb-3 px-3 mb-sm-0 d-inline-flex align-items-center">
+                                <label for="ultima_compra">Ultima orden de suministros:</label>
+                                <p class="ms-3 form-control form-control-user mt-3 text-danger" id="ultima_compra">
+                                <strong>{{last_c}}</strong>
+                                </p>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-sm-12 mb-3 px-3 mb-sm-0 d-inline-flex align-items-center">
+                                <label for="compra_fecha">Fecha de la ultima orden:</label>
+                                <p class="ms-3 form-control form-control-user mt-3 text-primary" id="compra_fecha">
+                                <strong>{{last_date_c}}</strong>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>

@@ -30,15 +30,17 @@
                                             [(ngModel)]="obj_usuario.telefono">
                                         <span class="span-alert" *ngIf="validate_tel == false">Inserte un Telefono Valido.</span>
                                     </div>
-                                    <div class="col-sm-4 mb-3 mb-sm-0 align-self-center align-items-center form-floating">
-                                        <select class="form-select form-select-lg" required="required" id="selec_rol" [(ngModel)]="obj_usuario.FO_rol">
+                                    <div class="col-sm-3 mb-3 mb-sm-0 align-self-center align-items-center form-floating">
+                                        <label for="selec_rol">Rol:</label>
+                                        <select class="form-select form-select-lg form-control-user pt-4" required="required" id="selec_rol" [(ngModel)]="obj_usuario.FO_rol">
                                             <option *ngFor="let itemR of rol" value="{{itemR.id_rol}}">{{itemR.rol}}</option>
-                                          </select>
-                                          <label for="selec_rol">Rol</label>
+                                        </select>
+                                          
                                           <span class="span-alert" *ngIf="validate_rol == false">Selecciona un Rol.</span>
                                     </div>
                                     <div class="col-sm-2 mb-3 mb-sm-0 align-self-center align-items-center form-floating">
-                                        <select class="form-select form-select-lg" id="selec_box" [(ngModel)]="obj_usuario.caja">
+                                        <label for="selec_box">Caja:</label>
+                                        <select class="form-select form-select-lg form-control-user pt-4" id="selec_box" [(ngModel)]="obj_usuario.caja">
                                             <option value="0" selected>0</option>
                                             <option value="1">1</option>
                                             <option value="2">2</option>
@@ -46,7 +48,6 @@
                                             <option value="4">4</option>
                                             <option value="5">5</option>
                                           </select>
-                                          <label for="selec_box">Caja</label>
                                           <span class="span-alert" *ngIf="validate_box == false">Selecciona una Caja.</span>
                                     </div>
                                 </div>
@@ -69,8 +70,12 @@
                                     </div>
                                 </div>
                                 
-                                <a [routerLink]="['/login']" class="btn btn-primary-alt btn-user btn-block" (click)="validar_info()">
+                                <a [routerLink]="['/register']" class="btn btn-primary-alt btn-user btn-block" (click)="validar_info()">
                                     Registrar Cuenta
+                                </a>
+                                <br>
+                                <a [routerLink]="['/user']" class="btn btn-outline-warning btn-user btn-block" (click)="limpiar()">
+                                    Cancelar registro
                                 </a>
                             </div>
                             <hr>

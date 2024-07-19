@@ -13,6 +13,9 @@ export class UsuarioService {
   consultar(){
     return this.http.get(`${this.url}?control=consulta`) ;
   }
+  conteo(){
+    return this.http.get(`${this.url}?control=conteo`) ;
+  }
   insertar(params:any){
     return this.http.post(`${this.url}?control=insertar`, JSON.stringify(params)) ;
   }
@@ -24,5 +27,8 @@ export class UsuarioService {
   }
   filtro(valor:any){
     return this.http.get(`${this.url}?control=filtrar&valor=${valor}`) ;
+  }
+  restore(valor:any){
+    return this.http.get(`${this.url}?control=restore&valor=${valor}`) ;
   }
 }

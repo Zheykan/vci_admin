@@ -45,7 +45,7 @@
                             </div>
 
                             <div class="form-group row align-items-center">
-                                <div class="col-sm-5 mb-3 mb-sm-0 d-inline-flex align-items-center">
+                                <div class="col-sm-4 mb-3 mb-sm-0 d-inline-flex align-items-center">
                                     <label for="p_mail">Correo electrónico:</label>
                                     <input type="email" class="form-control form-control-user" id="p_mail"
                                         placeholder="proveedor@mail.com" [(ngModel)]="obj_proveedor.correo">
@@ -57,19 +57,19 @@
                                     placeholder="Cll # Cra - N°" [(ngModel)]="obj_proveedor.direccion">
                                     <span class="span-alert" *ngIf="validate_dir == false">Indica una dirección de sucursal.</span>
                                 </div>
-                                <div class="col-sm-2 mb-sm-0 mb-3 align-self-center align-items-center form-floating">
-                                    <select class="form-select form-select-lg" id="selec_unidad" aria-label="Floating label select example" 
+                                <div class="col-sm-3 mb-sm-0 mb-3 align-self-center align-items-center form-floating">
+                                    <label for="selec_unidad">ciudad - sucursal</label>
+                                    <select class="form-select form-select-lg form-control-user pt-4" id="selec_unidad" aria-label="Floating label select example" 
                                     [(ngModel)]="obj_proveedor.FO_ciudad">
                                         <option *ngFor="let item of ciudad" value="{{item.id_ciudad}}">{{item.nombre}}</option>
                                     </select>
-                                    <label for="selec_unidad">ciudad - sucursal</label>
                                     <span class="span-alert" *ngIf="validate_city == false">Selecciona una ciudad.</span>
                                 </div>
                             </div>
 
                             <div class="form-group row align-self-center align-items-center">
                                 <div class="col-sm-6 mb-3 mb-sm-0 d-inline-flex align-items-center">
-                                    <a [routerLink]="['/provider']" class="btn btn-primary-alt btn-user btn-block" (click)="validar_info()">
+                                    <a [routerLink]="['/register-provider']" class="btn btn-primary-alt btn-user btn-block" (click)="validar_info()">
                                         Registrar Proveedor
                                     </a>
                                 </div>

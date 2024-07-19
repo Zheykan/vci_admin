@@ -19,6 +19,9 @@ export class DevolucionService {
   editar(id:number, params:any){
     return this.http.post(`${this.url}?control=editar&id=${id}`, JSON.stringify(params)) ;
   }
+  expand(id:number){
+    return this.http.get(`${this.url}?control=expand&id=${id}`) ;
+  }
   eliminar(id:number){
     return this.http.get(`${this.url}?control=eliminar&id=${id}`) ;
   }

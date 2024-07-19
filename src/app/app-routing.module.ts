@@ -22,33 +22,42 @@ import { SaleComponent } from './modulos/sale/sale.component';
 import { UserComponent } from './modulos/user/user.component';
 import { RegisterProductComponent } from './modulos/register-product/register-product.component';
 import { RegisterClientComponent } from './modulos/register-client/register-client.component';
+import { RegisterDevolutionComponent } from './modulos/register-devolution/register-devolution.component';
 import { RegisterProvideerComponent } from './modulos/register-provideer/register-provideer.component';
 import { RegisterPurchaseComponent } from './modulos/register-purchase/register-purchase.component';
 import { RegisterSaleComponent } from './modulos/register-sale/register-sale.component';
+import { ReportGeneralComponent } from './modulos/report-general/report-general.component';
+import { ReportPurchaseComponent } from './modulos/report-purchase/report-purchase.component';
+import { ReportSaleComponent } from './modulos/report-sale/report-sale.component';
 import { UnityComponent } from './modulos/unity/unity.component';
 
 const routes: Routes = [
   {
-    path: '', component: PrincipalComponent,
+    // La protección de acceso protegido por el guard redirige al inicio de sesion en toda ventana nueva no duplicada
+    path: '', component: PrincipalComponent, canActivate: [accessUserGuard],
       children:[
-        { path: '', redirectTo: '/login', pathMatch: 'full' },
-        { path: 'dashboard', component: DashboardComponent, canActivate: [accessUserGuard] },
-        { path: 'city', component: CityComponent, canActivate: [accessUserGuard] },
-        { path: 'client', component: ClientComponent, canActivate: [accessUserGuard] },
-        { path: 'department', component: DepartmentComponent, canActivate: [accessUserGuard] },
-        { path: 'devolution', component: DevolutionComponent, canActivate: [accessUserGuard] },
-        { path: 'mark', component: MarkComponent, canActivate: [accessUserGuard] },
-        { path: 'product', component: ProductComponent, canActivate: [accessUserGuard] },
-        { path: 'provider', component: ProviderComponent, canActivate: [accessUserGuard] },
-        { path: 'purchase', component: PurchaseComponent, canActivate: [accessUserGuard] },
-        { path: 'register-client', component: RegisterClientComponent, canActivate: [accessUserGuard] },
-        { path: 'register-product', component: RegisterProductComponent, canActivate: [accessUserGuard] },
-        { path: 'register-provider', component: RegisterProvideerComponent, canActivate: [accessUserGuard] },
-        { path: 'register-purchase', component: RegisterPurchaseComponent, canActivate: [accessUserGuard] },
-        { path: 'register-sale', component: RegisterSaleComponent, canActivate: [accessUserGuard] },
-        { path: 'sale', component: SaleComponent, canActivate: [accessUserGuard] },
-        { path: 'unity', component: UnityComponent, canActivate: [accessUserGuard] },
-        { path: 'user', component: UserComponent, canActivate: [accessUserGuard] },
+        { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
+        { path: 'dashboard', component: DashboardComponent },
+        { path: 'city', component: CityComponent },
+        { path: 'client', component: ClientComponent },
+        { path: 'department', component: DepartmentComponent },
+        { path: 'devolution', component: DevolutionComponent },
+        { path: 'mark', component: MarkComponent },
+        { path: 'product', component: ProductComponent },
+        { path: 'provider', component: ProviderComponent },
+        { path: 'purchase', component: PurchaseComponent },
+        { path: 'register-client', component: RegisterClientComponent },
+        { path: 'register-devolution', component: RegisterDevolutionComponent },
+        { path: 'register-product', component: RegisterProductComponent },
+        { path: 'register-provider', component: RegisterProvideerComponent },
+        { path: 'register-purchase', component: RegisterPurchaseComponent },
+        { path: 'register-sale', component: RegisterSaleComponent },
+        { path: 'report-general', component: ReportGeneralComponent },
+        { path: 'report-purchase', component: ReportPurchaseComponent },
+        { path: 'report-sale', component: ReportSaleComponent },
+        { path: 'sale', component: SaleComponent },
+        { path: 'unity', component: UnityComponent },
+        { path: 'user', component: UserComponent },
       ]
   },
   {

@@ -33,6 +33,9 @@ export class ProductComponent {
     nombre : ""
   }
   id_preservado: any ;
+  cant_preservada: any ;
+  price_preservada: any ;
+  date_preservada: any ;
   dato: any ;
   obtenido: any;
   FO_rol: any ;
@@ -54,6 +57,7 @@ export class ProductComponent {
   most_stock = false ;
   most_precio = false ;
   most_fecha = false ;
+  most_busq = false ;
 
   constructor(private sproduct: ProductoService, private sunid: UnidadService,
     private smark: MarcaService){}
@@ -83,6 +87,11 @@ export class ProductComponent {
     switch(dato){
       case "mostrar":
         this.most_u = true ;
+        this.most_edit = false ;
+        this.most_busq = false ;
+        this.most_stock = false ;
+        this.most_precio = false ;
+        this.most_fecha = false ;
       break ;
       case "ocultar":
         this.most_u = false ;
@@ -94,6 +103,11 @@ export class ProductComponent {
     switch(dato){
       case "mostrar":
         this.most_m = true ;
+        this.most_edit = false ;
+        this.most_busq = false ;
+        this.most_stock = false ;
+        this.most_precio = false ;
+        this.most_fecha = false ;
       break ;
       case "ocultar":
         this.most_m = false ;
@@ -158,6 +172,24 @@ export class ProductComponent {
     this.limpiar() ;
   }
 
+  mostrar_busq(dato: any){
+    switch(dato){
+      case "mostrar":
+        this.most_busq = true ;
+        this.most_u = false ;
+        this.most_m = false ;
+        this.most_edit = false ;
+        this.most_stock = false ;
+        this.most_precio = false ;
+        this.most_fecha = false ;
+      break ;
+      case "ocultar":
+        this.most_busq = false ;
+      break ;
+    }
+    this.dato = "" ;
+  }
+
   limpiar(){
     this.obj_unidad = {
       id_unidad : 0 ,
@@ -191,6 +223,9 @@ export class ProductComponent {
       fecha_venc : items.fecha_venc
     }
     this.id_preservado = id ;
+    this.cant_preservada = items.cantidad_producto ;
+    this.price_preservada = items.precio_venta ;
+    this.date_preservada = items.fecha_venc ;
   }
 
   validar_info(){
@@ -199,7 +234,7 @@ export class ProductComponent {
     }else{
       this.validate_cod = true ;
     }
-    if(this.obj_producto.nombre == ""){
+    if(this.obj_producto.nombre == "" || this.obj_producto.nombre == null){
       this.validate_name = false ;
     }else{
       this.validate_name = true ;
@@ -252,7 +287,7 @@ export class ProductComponent {
   }
 
   validar_info_u(){
-    if(this.obj_unidad.nombre == ""){
+    if(this.obj_unidad.nombre == "" || this.obj_unidad.nombre == null){
       this.validate_u_name = false ;
     }else{
       this.validate_u_name = true ;
@@ -273,7 +308,7 @@ export class ProductComponent {
   }
 
   validar_info_m(){
-    if(this.obj_marca.nombre == ""){
+    if(this.obj_marca.nombre == "" || this.obj_marca.nombre == null){
       this.validate_m_name = false ;
     }else{
       this.validate_m_name = true ;

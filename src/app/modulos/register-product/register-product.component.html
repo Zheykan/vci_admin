@@ -36,18 +36,18 @@
                                         <span class="span-alert" *ngIf="validate_med == false">Indica una medida.</span>
                                     </div>
                                     <div class="col-sm-2 mb-sm-0 mb-3 align-self-center align-items-center form-floating">
-                                        <select class="form-select form-select-lg" id="selec_unidad" aria-label="Floating label select example" 
+                                        <label for="selec_unidad">Unidad:</label>
+                                        <select class="form-select form-select-lg form-control-user pt-4" id="selec_unidad" aria-label="Floating label select example" 
                                         [(ngModel)]="obj_producto.FO_unidad">
                                             <option *ngFor="let itemu of unidad" value="{{itemu.id_unidad}}">{{itemu.nombre}}</option>
                                         </select>
-                                        <label for="selec_unidad">Unidad</label>
                                         <span class="span-alert" *ngIf="validate_und == false">Selecciona una unidad.</span>
                                     </div>
                                     <div class="col-sm-2 mb-sm-0 mb-3 align-self-center align-items-center form-floating">
-                                        <select class="form-select form-select-lg" id="selec_marca" [(ngModel)]="obj_producto.FO_marca">
+                                        <label for="selec_marca">Marca:</label>
+                                        <select class="form-select form-select-lg form-control-user pt-4" id="selec_marca" [(ngModel)]="obj_producto.FO_marca">
                                             <option *ngFor="let itemk of marca" value="{{itemk.id_marca}}">{{itemk.nombre}}</option>
                                         </select>
-                                        <label for="selec_marca">Marca</label>
                                         <span class="span-alert" *ngIf="validate_mark == false">Selecciona una marca.</span>
                                     </div>
                                     <div class="col-sm-4 mb-3 mb-sm-0 d-inline-flex align-items-center">
@@ -75,7 +75,7 @@
 
                                 <div class="form-group row align-self-center align-items-center">
                                     <div class="col-sm-6 mb-3 mb-sm-0 d-inline-flex align-items-center">
-                                        <a [routerLink]="['/product']" class="btn btn-primary-alt btn-user btn-block" (click)="validar_info()">
+                                        <a [routerLink]="['/register-product']" class="btn btn-primary-alt btn-user btn-block" (click)="validar_info()">
                                             Registrar Producto
                                         </a>
                                     </div>

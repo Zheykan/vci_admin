@@ -100,6 +100,11 @@ export class UnityComponent {
           text: "¡Este registro de unidad ha sido eliminado!",
           icon: "success"
         });
+        this.sunid.eliminar(id).subscribe((datos: any) => {
+          if(datos['resultado'] == 'OK'){
+            this.consulta() ;
+          }
+        }) ;
       } else if (
         /* Read more about handling dismissals below */
         result.dismiss === Swal.DismissReason.cancel
@@ -111,12 +116,5 @@ export class UnityComponent {
         });
       }
     });
-
-    this.sunid.eliminar(id).subscribe((datos: any) => 
-    {
-      if(datos['resultado'] == 'OK'){
-        this.consulta() ;
-      }
-    }) ;
   }
 }

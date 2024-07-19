@@ -11,10 +11,21 @@ export class PurchaseComponent {
 
   compra: any ;
   dato: any ;
-  obtenido: any;
+  obtenido: any ;
+  id_compra: any ;
+  lista_prd: any ;
+  subtotal = 0 ;
+  iva = 0.16 ;
+  impuestos = 0 ;
+  total: any ;
+  FO_rol : any ;
+  most_info = false ;
+  most_busq = false ;
+
   constructor(private scompra: CompraService){}
   ngOnInit(): void{
     this.consulta() ;
+    this.FO_rol = sessionStorage.getItem("FO_rol") ;
     this.busqueda(this.dato) ;
   }
 
@@ -24,11 +35,49 @@ export class PurchaseComponent {
     )
   }
 
+  mostrar_info(dato: any){
+    switch(dato){
+      case "mostrar":
+        this.most_info = true ;
+      break ;
+      case "ocultar":
+        this.most_info = false ;
+      break ;
+    }
+    this.dato = "" ;
+  }
+
+  mostrar_busq(dato: any){
+    switch(dato){
+      case "mostrar":
+        this.most_busq = true ;
+      break ;
+      case "ocultar":
+        this.most_busq = false ;
+      break ;
+    }
+    this.dato = "" ;
+  }
+
+  precarga_form(items: any, id: number){
+    this.scompra.expand(id).subscribe((resultado: any) =>
+    {this.lista_prd = resultado ;}
+    )
+    console.log(this.lista_prd);
+    this.id_compra = items.id_compra ;    
+    this.total = items.total ;
+    this.impuestos = this.total * this.iva ;
+    this.subtotal = this.total - this.impuestos ;
+  }
+
   busqueda(dato: any): void{
     if(dato != 0 || dato != ""){
       this.scompra.filtro(dato).subscribe((resultado: any) =>
       {this.obtenido = resultado ;
       })
+    }
+    else{
+      this.most_busq = false ;
     }
   }
 
@@ -55,6 +104,11 @@ export class PurchaseComponent {
           text: "¡Este registro de orden ha sido eliminado!",
           icon: "success"
         });
+        this.scompra.eliminar(id).subscribe((datos: any) => {
+          if(datos['resultado'] == 'OK'){
+            this.consulta() ;
+          }
+        }) ;
       } else if (
         /* Read more about handling dismissals below */
         result.dismiss === Swal.DismissReason.cancel
@@ -66,12 +120,5 @@ export class PurchaseComponent {
         });
       }
     });
-
-    this.scompra.eliminar(id).subscribe((datos: any) => 
-    {
-      if(datos['resultado'] == 'OK'){
-        this.consulta() ;
-      }
-    }) ;
   }
 }

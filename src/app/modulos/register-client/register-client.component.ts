@@ -38,22 +38,22 @@ export class RegisterClientComponent {
     }else{
       this.validate_ced = true ;
     }
-    if(this.obj_cliente.nombre_apellido == ""){
+    if(this.obj_cliente.nombre_apellido == "" || this.obj_cliente.nombre_apellido == null){
       this.validate_name = false ;
     }else{
       this.validate_name = true ;
     }
-    if(this.obj_cliente.telefono == ""){
+    if(this.obj_cliente.telefono == "" || this.obj_cliente.telefono == null){
       this.validate_tel = false ;
     }else{
       this.validate_tel = true ;
     }
-    if(this.obj_cliente.correo == ""){
+    if(this.obj_cliente.correo == "" || this.obj_cliente.correo == null){
       this.validate_mail = false ;
     }else{
       this.validate_mail = true ;
     }
-    if(this.obj_cliente.domicilio == ""){
+    if(this.obj_cliente.domicilio == "" || this.obj_cliente.domicilio == null){
       this.validate_dir = false ;
     }else{
       this.validate_dir = true ;

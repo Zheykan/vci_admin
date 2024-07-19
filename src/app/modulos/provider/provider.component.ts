@@ -31,6 +31,7 @@ export class ProviderComponent {
   id_preservado: any ;
   dato: any ;
   obtenido: any;
+  FO_rol: any ;
 
   validate_nit = true ;
   validate_razon = true ;
@@ -43,6 +44,7 @@ export class ProviderComponent {
   validate_c_dep = true ;
   most_edit = false ;
   most_c = false ;
+  most_busq = false ;
 
   constructor(private sprovider: ProveedorService, private scity: CiudadService, 
     private sdept: DepartamentoService){}
@@ -50,6 +52,7 @@ export class ProviderComponent {
     this.consulta() ;
     this.consulta_c() ;
     this.consulta_d() ;
+    this.FO_rol = sessionStorage.getItem("FO_rol") ;
     this.busqueda(this.dato) ;
   }
 
@@ -81,12 +84,28 @@ export class ProviderComponent {
     switch(dato){
       case "mostrar":
         this.most_c = true ;
+        this.most_edit = false ;
+        this.most_busq = false ;
       break ;
       case "ocultar":
         this.most_c = false ;
       break ;
     }
     this.limpiar() ;
+  }
+
+  mostrar_busq(dato: any){
+    switch(dato){
+      case "mostrar":
+        this.most_busq = true ;
+        this.most_edit = false ;
+        this.most_c = false ;
+      break ;
+      case "ocultar":
+        this.most_busq = false ;
+      break ;
+    }
+    this.dato = "" ;
   }
 
   limpiar(){
@@ -112,27 +131,27 @@ export class ProviderComponent {
     }else{
       this.validate_nit = true ;
     }
-    if(this.obj_proveedor.razon_social == ""){
+    if(this.obj_proveedor.razon_social == "" || this.obj_proveedor.razon_social == null){
       this.validate_razon = false ;
     }else{
       this.validate_razon = true ;
     }
-    if(this.obj_proveedor.contacto == ""){
+    if(this.obj_proveedor.contacto == "" || this.obj_proveedor.contacto == null){
       this.validate_cont = false ;
     }else{
       this.validate_cont = true ;
     }
-    if(this.obj_proveedor.telefono == ""){
+    if(this.obj_proveedor.telefono == "" || this.obj_proveedor.telefono == null){
       this.validate_tel = false ;
     }else{
       this.validate_tel = true ;
     }
-    if(this.obj_proveedor.correo == ""){
+    if(this.obj_proveedor.correo == "" || this.obj_proveedor.correo == null){
       this.validate_mail = false ;
     }else{
       this.validate_mail = true ;
     }
-    if(this.obj_proveedor.direccion == ""){
+    if(this.obj_proveedor.direccion == "" || this.obj_proveedor.direccion == null){
       this.validate_dir = false ;
     }else{
       this.validate_dir = true ;
@@ -160,12 +179,12 @@ export class ProviderComponent {
   }
 
   validar_info_c(){
-    if(this.obj_ciudad.nombre == ""){
+    if(this.obj_ciudad.nombre == "" || this.obj_ciudad.nombre == null){
       this.validate_c_nombre = false ;
     }else{
       this.validate_c_nombre = true ;
     }
-    if(this.obj_ciudad.FO_departamento == 0){
+    if(this.obj_ciudad.FO_departamento == 0 || this.obj_ciudad.FO_departamento == null){
       this.validate_c_dep = false ;
     }else{
       this.validate_c_dep = true ;
@@ -230,6 +249,11 @@ export class ProviderComponent {
           text: "¡Este registro de proveedor ha sido eliminado!",
           icon: "success"
         });
+        this.sprovider.eliminar(id).subscribe((datos: any) => {
+          if(datos['resultado'] == 'OK'){
+            this.consulta() ;
+          }
+        }) ;
       } else if (
         /* Read more about handling dismissals below */
         result.dismiss === Swal.DismissReason.cancel
@@ -241,12 +265,5 @@ export class ProviderComponent {
         });
       }
     });
-
-    this.sprovider.eliminar(id).subscribe((datos: any) => 
-    {
-      if(datos['resultado'] == 'OK'){
-        this.consulta() ;
-      }
-    }) ;
   }
 }

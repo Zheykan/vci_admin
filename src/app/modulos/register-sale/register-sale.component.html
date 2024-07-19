@@ -4,94 +4,252 @@
         <div class="card-body p-0">
             <!-- Nested Row within Card Body -->
             <div class="row">
-                <div class="col-lg-9">
+                <div class="col-lg-10">
                     <div class="p-5">
                         <div class="text-center">
-                            <h1 class="h4 text-gray-900 mb-4">¡Registra una nueva Orden de Suministros!</h1>
+                            <h1 class="h4 text-gray-900 mb-4">¡Registra una Venta!</h1>
                         </div>
 
                         <div class="user">
 
                             <div class="form-group row">
-                                <div class="col-sm-2 mb-3 mb-sm-0 d-inline-flex align-items-center">
-                                    <label for="id_venta">Número de Factura:</label>
-                                    <input type="number" class="form-control form-control-user" id="id_venta"
-                                    placeholder="4234" min="1" [(ngModel)]="obj_venta.id_venta">
+                                <div class="col-sm-2 mb-3 mt-3 mb-sm-0 align-items-center align-items-center form-floating">
+                                    <label for="consecutivo">Factura ant.</label>
+                                    <p class="pt-4 form-control form-control-user text-black-50" id="consecutivo">
+                                        {{maximo}}
+                                    </p>
+                                </div>
+                                <div class="col-sm-2 mb-3 mt-3 mb-sm-0 align-items-center align-items-center form-floating">
+                                    <label for="id_venta">N° Factura:</label>
+                                    <input type="number" class="pt-4 form-control form-control-user text-wrap text-danger" id="id_venta"
+                                    placeholder="4234" defaultValue="{{maximo+1}}" min="{{maximo+1}}" [(ngModel)]="obj_venta.id_venta">
                                     <span class="span-alert" *ngIf="validate_fac == false">Inserte un número de orden.</span>
                                 </div>
-                                <div class="col-sm-4 mb-sm-0 mb-3 align-self-center align-items-center form-floating">
+                                <div class="col-sm-3 mb-sm-0 mb-3 mt-3 align-self-center align-items-center form-floating">
                                     <label for="selec_vend">Vendedor:</label>
-                                    <select class="form-select form-select-lg" id="selec_vend" aria-label="Floating label select example" 
-                                    [(ngModel)]="obj_venta.FO_usuario_vendedor">
-                                        <option *ngFor="let item of vendedor" value="{{item.id_usuario}}">{{item.nombre}}</option>
-                                    </select>
+                                    <p class="form-control form-control-user pt-4" id="selec_vend">
+                                        {{vendedor_n}}
+                                    </p>
                                     <span class="span-alert" *ngIf="validate_vend == false">Selecciona un vendedor.</span>
                                 </div>
-                                <div class="col-sm-4 mb-sm-0 mb-3 align-self-center align-items-center form-floating">
+                                <div class="col-sm-2 mb-sm-0 mb-3 align-self-center align-items-center form-floating">
                                     <label for="selec_cli">Cliente:</label>
-                                    <select class="form-select form-select-lg" id="selec_cli" aria-label="Floating label select example" 
+                                    <select class="form-select form-select-lg form-control-user pt-4" id="selec_cli" aria-label="Floating label select example" 
                                     [(ngModel)]="obj_venta.FO_cliente">
                                         <option *ngFor="let item of cliente" value="{{item.id_cliente}}">{{item.id_cliente}}</option>
                                     </select>
                                     <span class="span-alert" *ngIf="validate_cli == false">Selecciona un cliente.</span>
                                 </div>
-                                <div class="col-sm-2 mb-3 mb-sm-0 d-inline-flex align-items-center">
+                                <div class="col-sm-3 mb-3 mt-3 mb-sm-0 align-items-center align-items-center form-floating">
                                     <label for="fecha_sale">Fecha de Registro:</label>
                                     <input type="date" class="form-control form-control-user" id="fecha_sale"
                                     placeholder="01-01-2024" min="01-01-2000" [(ngModel)]="obj_venta.fecha">
                                     <span class="span-alert" *ngIf="validate_date == false">Indica una fecha valida.</span>
                                 </div>
                             </div>
-
+                            <!-- Cuadro de busqueda de Productos -->
                             <div class="form-group row">
-                                <div class="col-sm-6 mb-3 mb-sm-0 d-inline-flex align-items-center">
-                                    <label for="lista_productos">Lista de productos:</label>
-                                    <input type="text" class="form-control form-control-user" id="lista_productos"
-                                    placeholder="Arequipe pote 125gr Alpina, Manzana 1Kg Chilena" 
-                                    [(ngModel)]="obj_venta.productos_venta">
-                                    <span class="span-alert" *ngIf="validate_list == false">Ingresa al menos un producto.</span>
-                                </div>
-                                <div class="col-sm-3 mb-3 mb-sm-0 d-inline-flex align-items-center">
-                                    <label for="cantidad_productosv">Cantidad por producto:</label>
-                                    <input type="text" class="form-control form-control-user" id="cantidad_productosv"
-                                    placeholder="10, 50, 13" min="1" 
-                                    [(ngModel)]="obj_venta.cantidad_venta">
-                                    <span class="span-alert" *ngIf="validate_cant == false">Ingresa las cantidades de los productos.</span>
+                                <div class="col-lg-12 mb-3 mb-sm-0">
+                                    <div class="card border border-0">
+                                        <div class="card-header d-inline-flex align-items-center border border-0">
+                                            <i class="me-1">
+                                                <svg xmlns="http://www.w3.org/2000/svg" height="15" width="15" viewBox="0 0 512 512">
+                                                    <path d="M416 208c0 45.9-14.9 88.3-40 122.7L502.6 457.4c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L330.7 376c-34.4 25.2-76.8 40-122.7 40C93.1 416 0 322.9 0 208S93.1 0 208 0S416 93.1 416 208zM208 352a144 144 0 1 0 0-288 144 144 0 1 0 0 288z"/>
+                                                </svg>
+                                            </i>
+                                            Buscar Productos:
+                                            <div class="input-group mx-2 mt-2 mb-1">
+                                                <input class="form-control" type="text" aria-label="Search for..." aria-describedby="btnNavbarSearch"
+                                                [(ngModel)]="dato" placeholder="Código, Nombre, Marca (10, Jean, Alpina)"/>
+                                                <button class="btn btn-dark" id="btnNavbarSearch" type="button" (click)="busqueda(dato)" (click)="mostrar_busq('mostrar')">
+                                                    <i>
+                                                        <svg xmlns="http://www.w3.org/2000/svg" height="18" width="18" viewBox="0 0 512 512">
+                                                            <path fill="#ffffff"
+                                                            d="M416 208c0 45.9-14.9 88.3-40 122.7L502.6 457.4c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L330.7 376c-34.4 25.2-76.8 40-122.7 40C93.1 416 0 322.9 0 208S93.1 0 208 0S416 93.1 416 208zM208 352a144 144 0 1 0 0-288 144 144 0 1 0 0 288z" />
+                                                        </svg>
+                                                    </i>
+                                                </button>
+                                            </div>
+                                        </div>
+                                        <div class="card-body" *ngIf="most_busq == true">
+                                            <div class="table-responsive">
+                                                <table class="table table-bordered" id="dataTableProduct" width="100%" cellspacing="0">
+                                                    <thead class="table-info">
+                                                        <tr>
+                                                            <th>Código</th>
+                                                            <th>Producto</th>
+                                                            <th>Cantidad</th>
+                                                            <th>Precio</th>
+                                                            <th>
+                                                                <a class="btn btn-danger btn-close btn-half-block ms-1" (click)="mostrar_busq('ocultar')"></a>
+                                                            </th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tfoot class="table-dark">
+                                                        <tr>
+                                                            <th>Código</th>
+                                                            <th>Producto</th>
+                                                            <th>Cantidad</th>
+                                                            <th>Precio</th>
+                                                        </tr>
+                                                    </tfoot>
+                                                    <tbody>
+                                                        <tr *ngFor="let item of obtenido">
+                                                            <td>{{item.id_producto}}</td>
+                                                            <td>{{item.nombre+" "+item.medida+" "+item.unidad_med+" "+item.marca}}</td>
+                                                            <td>{{item.cantidad_producto}}</td>
+                                                            <td>{{item.precio_venta | currency}}</td>
+                                                            <td>
+                                                                <div class="sb-nav-link-icon">
+                                                                    <i class="ms-1 me-1" data-bs-toggle="modal" data-bs-target="#descripcion" style="cursor:pointer"
+                                                                    title="Agregar" (click)="mostrar_stock('mostrar')" (click)="cantidad(item)"
+                                                                    *ngIf="rol == 'Vendedor' || FO_rol == 3 || FO_rol == 4">
+                                                                        <svg xmlns="http://www.w3.org/2000/svg" height="20" width="20" viewBox="0 0 512 512">
+                                                                            <path 
+                                                                            d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM232 344V280H168c-13.3 0-24-10.7-24-24s10.7-24 24-24h64V168c0-13.3 10.7-24 24-24s24 10.7 24 24v64h64c13.3 0 24 10.7 24 24s-10.7 24-24 24H280v64c0 13.3-10.7 24-24 24s-24-10.7-24-24z"/>
+                                                                        </svg>
+                                                                    </i>
+
+                                                                    <div class="modal fade" id="descripcion" tabindex="-1" aria-labelledby="descripcionLabel" style="display: none;" aria-hidden="true">
+                                                                        <div class="modal-dialog modal-sm pt-5">
+                                                                          <div class="modal-content">
+                                                                            <div class="modal-header">
+                                                                              <h1 class="modal-title fs-4" id="descripcionLabel">No debe superar: {{valor}} Und.</h1>
+                                                                              <button type="button" class="btn btn-danger btn-close btn-half-block" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+                                                                            </div>
+                                                                            <div class="modal-body">
+                                                                    
+                                                                                <!-- Campo ingresar cantidad de producto -->
+                                                                                <div class="col-sm-12 mb-3 mb-sm-0 d-block align-items-center" *ngIf="most_stock == true">
+                                                                                    <div class="card mb-4 col-sm-12 mb-sm-0 d-inline-flex">
+                                                                                        <div class="card-body">
+                                                                                            <div class="form-group row">
+                                                                                                <div class="col-sm-12 mb-3 mb-sm-0 d-inline-flex align-items-center">
+                                                                                                    <label for="nuevo_stock">Cantidad a ingresar:</label>
+                                                                                                    <input type="number" class="form-control form-control-user" id="nuevo_stock" placeholder="21"
+                                                                                                    [(ngModel)]="stock_p" min="1" max="{{valor}}">
+                                                                                                    <span class="span-alert" *ngIf="validate_cant == false">Indica una cantidad.</span>
+                                                                                                </div>
+                                                                                            </div>
+                                                                                            <div class="form-group row align-self-center align-items-center">
+                                                                                                <div class="col-sm-6 mb-3 mb-sm-0 d-inline-flex align-items-center">
+                                                                                                    <a class="btn btn-primary-alt btn-user btn-block" (click)="validar_cnt()"
+                                                                                                    (click)="mostrar_stock('ocultar')" data-bs-dismiss="modal">
+                                                                                                    Agregar
+                                                                                                    </a>
+                                                                                                </div>
+                                                                                                <div class="col-sm-6 mb-3 mb-sm-0 d-inline-flex align-items-center">
+                                                                                                    <a class="btn btn-outline-warning btn-user btn-block" data-bs-dismiss="modal" (click)="mostrar_stock('ocultar')">
+                                                                                                    Cancelar
+                                                                                                    </a>
+                                                                                                </div>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>
+                                                                    
+                                                                            </div>
+                                                                        </div>
+                                                                      </div>
+                                                                    </div>
+
+                                                                </div>
+                                                            </td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
-
+                            <!-- Lista de Productos Venta-->
+                            <div class="form-group row">
+                                <div class="card mb-4">
+                                    <div class="card-header">
+                                        <i class="fas fa-table me-1"></i>
+                                        Lista de Productos.
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="table-responsive">
+                                            <table class="table table-bordered" id="dataTableProduct" width="100%" cellspacing="0">
+                                                <thead class="table-info">
+                                                    <tr>
+                                                        <th>Código</th>
+                                                        <th>Producto</th>
+                                                        <th>Cantidad</th>
+                                                        <th>Precio</th>
+                                                        <th>SubTotal</th>
+                                                    </tr>
+                                                </thead>
+                                                <tfoot class="table-dark">
+                                                    <tr>
+                                                        <th>Código</th>
+                                                        <th>Producto</th>
+                                                        <th>Cantidad</th>
+                                                        <th>Precio</th>
+                                                        <th>SubTotal</th>
+                                                    </tr>
+                                                </tfoot>
+                                                <tbody>
+                                                    <tr *ngFor="let itemp of lista_venta">
+                                                        <td>{{itemp[0]}}</td>
+                                                        <td>{{itemp[1]}}</td>
+                                                        <td>{{itemp[2]}}</td>
+                                                        <td>{{itemp[3] | currency}}</td>
+                                                        <td>{{itemp[4] | currency}}</td>
+                                                        <td>
+                                                            <div class="sb-nav-link-icon">
+                                                                <i class="ms-1 me-1" style="cursor:pointer" title="Quitar" (click)="quitar_prd(itemp)"
+                                                                *ngIf="rol == 'Vendedor' || FO_rol == 3 || FO_rol == 4">
+                                                                    <svg xmlns="http://www.w3.org/2000/svg" height="15" width="15" viewBox="0 0 384 512">
+                                                                        <path 
+                                                                        d="M342.6 150.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L192 210.7 86.6 105.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L146.7 256 41.4 361.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L192 301.3 297.4 406.6c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L237.3 256 342.6 150.6z"/>
+                                                                    </svg>
+                                                                </i>
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                             <div class="form-group row align-items-center">
-                                <div class="col-sm-4 mb-3 mb-sm-0 d-inline-flex align-items-center">
+                                <div class="col-sm-4 mb-3 mb-sm-0 d-inline-flex align-self-center align-items-center form-floating">
                                     <label for="subtotalv">SubTotal:</label>
-                                    <input type="number" class="form-control form-control-user" id="subtotalv"
-                                    placeholder="193200" min="1" 
-                                    [(ngModel)]="obj_venta.subtotal">
-                                    <span class="span-alert" *ngIf="validate_subt == false">Indica el subtotal de la venta.</span>
+                                    <p class="form-control form-control-user pt-4" id="subtotalv">
+                                        {{subtotal | currency}}
+                                    </p>
                                 </div>
-                                <div class="col-sm-4 mb-3 mb-sm-0 d-inline-flex align-items-center">
+                                <div class="col-sm-4 mb-3 mb-sm-0 d-inline-flex align-self-center align-items-center form-floating">
                                     <label for="impuestosv">Impuestos:</label>
-                                    <input type="text" class="form-control form-control-user" id="impuestosv"
-                                    placeholder="36800" min="1" 
-                                    [(ngModel)]="obj_venta.impuestos">
-                                    <span class="span-alert" *ngIf="validate_imp == false">Indica los impuestos de la venta.</span>
+                                    <p class="form-control form-control-user pt-4" id="impuestosv">
+                                        {{impuestos | currency}}
+                                    </p>
                                 </div>
-                                <div class="col-sm-4 mb-3 mb-sm-0 d-inline-flex align-items-center">
+                                <div class="col-sm-4 mb-3 mb-sm-0 d-inline-flex align-self-center align-items-center form-floating">
                                     <label for="totalv">Total:</label>
-                                    <input type="text" class="form-control form-control-user" id="totalv"
-                                    placeholder="230000" min="1" 
-                                    [(ngModel)]="obj_venta.total">
-                                    <span class="span-alert" *ngIf="validate_t == false">Indica el total de la venta.</span>
+                                    <p class="form-control form-control-user pt-4" id="totalv">
+                                        {{total_v | currency}}
+                                    </p>
                                 </div>
                             </div>
 
                             <div class="form-group row align-self-center align-items-center">
-                                <div class="col-sm-6 mb-3 mb-sm-0 d-inline-flex align-items-center">
-                                    <a [routerLink]="['register-sale']" class="btn btn-primary-alt btn-user btn-block" (click)="validar_info()">
+                                <div class="col-sm-4 mb-3 mb-sm-0 d-inline-flex align-items-center">
+                                    <a [routerLink]="['/register-sale']" class="btn btn-primary-alt btn-user btn-block" (click)="createPdf()" (click)="validar_info()">
                                         Registrar Venta
                                     </a>
                                 </div>
-                                <div class="col-sm-6 mb-3 mb-sm-0 d-inline-flex align-items-center">
-                                    <a [routerLink]="['sale']" class="btn btn-outline-warning btn-user btn-block">
+                                <div class="col-sm-4 mb-3 mb-sm-0 d-inline-flex align-items-center">
+                                    <a class="btn btn-facebook btn-user btn-block" (click)="createPdf()">
+                                        Imprimir
+                                    </a>
+                                </div>
+                                <div class="col-sm-4 mb-3 mb-sm-0 d-inline-flex align-items-center">
+                                    <a class="btn btn-outline-warning btn-user btn-block" (click)="limpiar()" (click)="mostrar_busq('ocultar')" [routerLink]="['/sale']">
                                         Cancelar Registro
                                     </a>
                                 </div>
@@ -99,9 +257,14 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-3 d-none d-lg-block bg-purchase-image"></div>
+                <!-- Imagen alusiva -->
+                <div class="col-lg-2 d-none d-lg-block bg-purchase-image"></div>
             </div>
         </div>
     </div>
 </div>
+
+<!--Modal descripcion-->
+
+
 </div>

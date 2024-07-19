@@ -22,6 +22,10 @@ export class ProductoService {
     //console.log(params);
     return this.http.post(`${this.url}?control=editar&id=${id}`, JSON.stringify(params)) ;
   }
+  stock(id:number, params:any){
+    //console.log(params);
+    return this.http.post(`${this.url}?control=stock&id=${id}`, JSON.stringify(params)) ;
+  }
   eliminar(id:number){
     //console.log(`${this.url}?control=eliminar&id=${id}`);
     return this.http.get(`${this.url}?control=eliminar&id=${id}`) ;

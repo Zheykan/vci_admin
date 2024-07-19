@@ -13,11 +13,17 @@ export class CompraService {
    consultar(){
      return this.http.get(`${this.url}?control=consulta`) ;
    }
+   maximo(){
+    return this.http.get(`${this.url}?control=max`) ;
+   }
    insertar(params:any){
      return this.http.post(`${this.url}?control=insertar`, JSON.stringify(params)) ;
    }
    editar(id:number, params:any){
      return this.http.post(`${this.url}?control=editar&id=${id}`, JSON.stringify(params)) ;
+   }
+   expand(id:number){
+    return this.http.get(`${this.url}?control=expand&id=${id}`) ;
    }
    eliminar(id:number){
      return this.http.get(`${this.url}?control=eliminar&id=${id}`) ;

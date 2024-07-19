@@ -41,13 +41,24 @@ export class RegisterComponent {
     {this.rol = resultado ;})
   }
 
+  limpiar(){
+    this.obj_usuario = {
+      nombre : "" ,
+      contrasenia : "" ,
+      telefono : "" ,
+      correo : "" ,
+      FO_rol : 0 ,
+      caja : 0 
+    }
+  }
+
   validar_info(){
-    if(this.obj_usuario.nombre == ""){
+    if(this.obj_usuario.nombre == "" || this.obj_usuario.nombre == null){
       this.validate_name = false ;
     }else{
       this.validate_name = true ;
     }
-    if(this.obj_usuario.contrasenia == ""){
+    if(this.obj_usuario.contrasenia == "" || this.obj_usuario.contrasenia == null){
       this.validate_pass = false ;
     }else{
       this.validate_pass = true ;
@@ -57,7 +68,7 @@ export class RegisterComponent {
     }else{
       this.validate_tel = true ;
     }
-    if(this.obj_usuario.correo == ""){
+    if(this.obj_usuario.correo == "" || this.obj_usuario.correo == null){
       this.validate_email = false ;
     }else{
       this.validate_email = true ;
@@ -71,6 +82,7 @@ export class RegisterComponent {
       this.validate_tel == true && this.validate_email == true && 
       this.validate_rol == true){
         this.registrar_u() ;
+        this.limpiar() ;
     }
   }
 

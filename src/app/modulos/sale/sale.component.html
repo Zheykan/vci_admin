@@ -16,7 +16,7 @@
             <div class="input-group mx-2 mt-2 mb-1">
                 <input class="form-control" type="text" aria-label="Search for..." aria-describedby="btnNavbarSearch"
                 [(ngModel)]="dato" placeholder="Número de Factura, Cedula, Vendedor, Fecha"/>
-                <button class="btn btn-dark" id="btnNavbarSearch" type="button" (click)="busqueda(dato)">
+                <button class="btn btn-dark" id="btnNavbarSearch" type="button" (click)="busqueda(dato)" (click)="mostrar_busq('mostrar')">
                     <i>
                         <svg xmlns="http://www.w3.org/2000/svg" height="18" width="18" viewBox="0 0 512 512">
                             <path fill="#ffffff"
@@ -26,7 +26,7 @@
                 </button>
             </div>
         </div>
-        <div class="card-body">
+        <div class="card-body" *ngIf="most_busq == true">
             <div class="table-responsive">
                 <table class="table table-bordered" id="dataTableProduct" width="100%" cellspacing="0">
                     <thead class="table-info">
@@ -36,9 +36,11 @@
                             <th>Cliente</th>
                             <th>Vendedor</th>
                             <th>Fecha</th>
-                            <th>Subtotal</th>
                             <th>Total</th>
                             <th>Acciones</th>
+                            <th>
+                                <a class="btn btn-danger btn-close btn-half-block ms-1" (click)="mostrar_busq('ocultar')"></a>
+                            </th>
                         </tr>
                     </thead>
                     <tfoot class="table-dark">
@@ -48,7 +50,6 @@
                             <th>Cliente</th>
                             <th>Vendedor</th>
                             <th>Fecha</th>
-                            <th>Subtotal</th>
                             <th>Total</th>
                             <th>Acciones</th>
                         </tr>
@@ -60,17 +61,25 @@
                             <td>{{item.cliente}}</td>
                             <td>{{item.vendedor}}</td>
                             <td>{{item.fecha}}</td>
-                            <td>{{item.subtotal | currency}}</td>
                             <td>{{item.total | currency}}</td>
                             <td>
                                 <div class="sb-nav-link-icon">
-                                    <i class="ms-1 me-1" style="cursor:pointer" title="Actualizar">
-                                        <svg xmlns="http://www.w3.org/2000/svg" height="20" width="20" viewBox="0 0 512 512">
+                                    <i class="ms-1 me-1" data-bs-toggle="modal" data-bs-target="#descripcion" style="cursor:pointer"
+                                    title="Examinar" (click)="mostrar_info('mostrar')" (click)="precarga_form(item,item.id_venta)">
+                                        <svg xmlns="http://www.w3.org/2000/svg" height="20" width="20" viewBox="0 0 192 512">
                                             <path 
-                                            d="M352 320c88.4 0 160-71.6 160-160c0-15.3-2.2-30.1-6.2-44.2c-3.1-10.8-16.4-13.2-24.3-5.3l-76.8 76.8c-3 3-7.1 4.7-11.3 4.7H336c-8.8 0-16-7.2-16-16V118.6c0-4.2 1.7-8.3 4.7-11.3l76.8-76.8c7.9-7.9 5.4-21.2-5.3-24.3C382.1 2.2 367.3 0 352 0C263.6 0 192 71.6 192 160c0 19.1 3.4 37.5 9.5 54.5L19.9 396.1C7.2 408.8 0 426.1 0 444.1C0 481.6 30.4 512 67.9 512c18 0 35.3-7.2 48-19.9L297.5 310.5c17 6.2 35.4 9.5 54.5 9.5zM80 408a24 24 0 1 1 0 48 24 24 0 1 1 0-48z"/>
+                                            d="M48 80a48 48 0 1 1 96 0A48 48 0 1 1 48 80zM0 224c0-17.7 14.3-32 32-32H96c17.7 0 32 14.3 32 32V448h32c17.7 0 32 14.3 32 32s-14.3 32-32 32H32c-17.7 0-32-14.3-32-32s14.3-32 32-32H64V256H32c-17.7 0-32-14.3-32-32z"/>
                                         </svg>
                                     </i>
-                                    <i class="ms-1 me-1" style="cursor:pointer" title="Eliminar" (click)="eliminar(item.id_venta)" *ngIf="FO_rol == 3 || FO_rol == 4">
+                                    <i class="ms-1 me-1" data-bs-toggle="modal" data-bs-target="#devolucion" style="cursor:pointer"
+                                    title="Buscar Devolución" (click)="busqueda_dev(item.id_venta)">
+                                        <svg xmlns="http://www.w3.org/2000/svg" height="20" width="20" viewBox="0 0 512 512">
+                                            <path 
+                                            d="M416 208c0 45.9-14.9 88.3-40 122.7L502.6 457.4c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L330.7 376c-34.4 25.2-76.8 40-122.7 40C93.1 416 0 322.9 0 208S93.1 0 208 0S416 93.1 416 208zM241 119c-9.4-9.4-24.6-9.4-33.9 0s-9.4 24.6 0 33.9l31 31H120c-13.3 0-24 10.7-24 24s10.7 24 24 24H238.1l-31 31c-9.4 9.4-9.4 24.6 0 33.9s24.6 9.4 33.9 0l72-72c9.4-9.4 9.4-24.6 0-33.9l-72-72z"/>
+                                        </svg>
+                                    </i>
+                                    <i class="ms-1 me-1" style="cursor:pointer" title="Eliminar" (click)="eliminar(item.id_venta)"
+                                    *ngIf="FO_rol == 3 || FO_rol == 4">
                                         <svg xmlns="http://www.w3.org/2000/svg" height="20" width="20" viewBox="0 0 448 512">
                                             <path 
                                             d="M135.2 17.7C140.6 6.8 151.7 0 163.8 0H284.2c12.1 0 23.2 6.8 28.6 17.7L320 32h96c17.7 0 32 14.3 32 32s-14.3 32-32 32H32C14.3 96 0 81.7 0 64S14.3 32 32 32h96l7.2-14.3zM32 128H416V448c0 35.3-28.7 64-64 64H96c-35.3 0-64-28.7-64-64V128zm96 64c-8.8 0-16 7.2-16 16V432c0 8.8 7.2 16 16 16s16-7.2 16-16V208c0-8.8-7.2-16-16-16zm96 0c-8.8 0-16 7.2-16 16V432c0 8.8 7.2 16 16 16s16-7.2 16-16V208c0-8.8-7.2-16-16-16zm96 0c-8.8 0-16 7.2-16 16V432c0 8.8 7.2 16 16 16s16-7.2 16-16V208c0-8.8-7.2-16-16-16z"/>
@@ -87,9 +96,20 @@
 
     <!-- Contenido Tabla de Ventas -->
     <div class="card mb-4">
-        <div class="card-header">
-            <i class="fas fa-table me-1"></i>
-            Lista de Ventas.
+        <div class="card-header py-1 d-inline-flex align-items-center justify-content-between">
+            <i class="me-1">
+                <svg xmlns="http://www.w3.org/2000/svg" height="14" width="14" viewBox="0 0 512 512">
+                    <path d="M64 256V160H224v96H64zm0 64H224v96H64V320zm224 96V320H448v96H288zM448 256H288V160H448v96zM64 32C28.7 32 0 60.7 0 96V416c0 35.3 28.7 64 64 64H448c35.3 0 64-28.7 64-64V96c0-35.3-28.7-64-64-64H64z"/>
+                </svg>
+                Lista de Ventas.
+            </i>
+            <a [routerLink]="['/register-sale']" class="btn btn-primary-alt btn-user btn-lg" *ngIf="rol == 'Vendedor' || FO_rol == 3 || FO_rol == 4">
+                <i class="me-1">
+                    <svg xmlns="http://www.w3.org/2000/svg" height="18" width="18" viewBox="0 0 448 512">
+                        <path d="M256 80c0-17.7-14.3-32-32-32s-32 14.3-32 32V224H48c-17.7 0-32 14.3-32 32s14.3 32 32 32H192V432c0 17.7 14.3 32 32 32s32-14.3 32-32V288H400c17.7 0 32-14.3 32-32s-14.3-32-32-32H256V80z"/></svg>
+                </i>
+                Nueva Venta
+            </a>
         </div>
         <div class="card-body">
             <div class="table-responsive">
@@ -101,7 +121,6 @@
                             <th>Cliente</th>
                             <th>Vendedor</th>
                             <th>Fecha</th>
-                            <th>Subtotal</th>
                             <th>Total</th>
                             <th>Acciones</th>
                         </tr>
@@ -113,7 +132,6 @@
                             <th>Cliente</th>
                             <th>Vendedor</th>
                             <th>Fecha</th>
-                            <th>Subtotal</th>
                             <th>Total</th>
                             <th>Acciones</th>
                         </tr>
@@ -125,17 +143,26 @@
                             <td>{{item.cliente}}</td>
                             <td>{{item.vendedor}}</td>
                             <td>{{item.fecha}}</td>
-                            <td>{{item.subtotal | currency}}</td>
                             <td>{{item.total | currency}}</td>
                             <td>
                                 <div class="sb-nav-link-icon">
-                                    <i class="ms-1 me-1" style="cursor:pointer" title="Actualizar">
-                                        <svg xmlns="http://www.w3.org/2000/svg" height="20" width="20" viewBox="0 0 512 512">
+                                    <i class="ms-1 me-1" data-bs-toggle="modal" data-bs-target="#descripcion" style="cursor:pointer"
+                                    title="Examinar" (click)="mostrar_info('mostrar')" (click)="precarga_form(item,item.id_venta)"
+                                    (click)="mostrar_busq('ocultar')">
+                                        <svg xmlns="http://www.w3.org/2000/svg" height="20" width="20" viewBox="0 0 192 512">
                                             <path 
-                                            d="M352 320c88.4 0 160-71.6 160-160c0-15.3-2.2-30.1-6.2-44.2c-3.1-10.8-16.4-13.2-24.3-5.3l-76.8 76.8c-3 3-7.1 4.7-11.3 4.7H336c-8.8 0-16-7.2-16-16V118.6c0-4.2 1.7-8.3 4.7-11.3l76.8-76.8c7.9-7.9 5.4-21.2-5.3-24.3C382.1 2.2 367.3 0 352 0C263.6 0 192 71.6 192 160c0 19.1 3.4 37.5 9.5 54.5L19.9 396.1C7.2 408.8 0 426.1 0 444.1C0 481.6 30.4 512 67.9 512c18 0 35.3-7.2 48-19.9L297.5 310.5c17 6.2 35.4 9.5 54.5 9.5zM80 408a24 24 0 1 1 0 48 24 24 0 1 1 0-48z"/>
+                                            d="M48 80a48 48 0 1 1 96 0A48 48 0 1 1 48 80zM0 224c0-17.7 14.3-32 32-32H96c17.7 0 32 14.3 32 32V448h32c17.7 0 32 14.3 32 32s-14.3 32-32 32H32c-17.7 0-32-14.3-32-32s14.3-32 32-32H64V256H32c-17.7 0-32-14.3-32-32z"/>
                                         </svg>
                                     </i>
-                                    <i class="ms-1 me-1" style="cursor:pointer" title="Eliminar" (click)="eliminar(item.id_venta)" *ngIf="FO_rol == 3 || FO_rol == 4">
+                                    <i class="ms-1 me-1" data-bs-toggle="modal" data-bs-target="#devolucion" style="cursor:pointer"
+                                    title="Buscar Devolución" (click)="busqueda_dev(item.id_venta)">
+                                        <svg xmlns="http://www.w3.org/2000/svg" height="20" width="20" viewBox="0 0 512 512">
+                                            <path 
+                                            d="M416 208c0 45.9-14.9 88.3-40 122.7L502.6 457.4c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L330.7 376c-34.4 25.2-76.8 40-122.7 40C93.1 416 0 322.9 0 208S93.1 0 208 0S416 93.1 416 208zM241 119c-9.4-9.4-24.6-9.4-33.9 0s-9.4 24.6 0 33.9l31 31H120c-13.3 0-24 10.7-24 24s10.7 24 24 24H238.1l-31 31c-9.4 9.4-9.4 24.6 0 33.9s24.6 9.4 33.9 0l72-72c9.4-9.4 9.4-24.6 0-33.9l-72-72z"/>
+                                        </svg>
+                                    </i>
+                                    <i class="ms-1 me-1" style="cursor:pointer" title="Eliminar" (click)="eliminar(item.id_venta)"
+                                    (click)="mostrar_busq('ocultar')" *ngIf="FO_rol == 3 || FO_rol == 4">
                                         <svg xmlns="http://www.w3.org/2000/svg" height="20" width="20" viewBox="0 0 448 512">
                                             <path 
                                             d="M135.2 17.7C140.6 6.8 151.7 0 163.8 0H284.2c12.1 0 23.2 6.8 28.6 17.7L320 32h96c17.7 0 32 14.3 32 32s-14.3 32-32 32H32C14.3 96 0 81.7 0 64S14.3 32 32 32h96l7.2-14.3zM32 128H416V448c0 35.3-28.7 64-64 64H96c-35.3 0-64-28.7-64-64V128zm96 64c-8.8 0-16 7.2-16 16V432c0 8.8 7.2 16 16 16s16-7.2 16-16V208c0-8.8-7.2-16-16-16zm96 0c-8.8 0-16 7.2-16 16V432c0 8.8 7.2 16 16 16s16-7.2 16-16V208c0-8.8-7.2-16-16-16zm96 0c-8.8 0-16 7.2-16 16V432c0 8.8 7.2 16 16 16s16-7.2 16-16V208c0-8.8-7.2-16-16-16z"/>
@@ -149,4 +176,120 @@
             </div>
         </div>
     </div>
+
+    <!--Modal descripcion-->
+    <div class="modal fade" id="descripcion" tabindex="-1" aria-labelledby="descripcionLabel" style="display: none;" aria-hidden="true">
+        <div class="modal-dialog modal-lg pt-5">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h1 class="modal-title fs-3" id="descripcionLabel">Detalles de la orden {{id_venta}}.</h1>
+              <button type="button" class="btn btn-danger btn-close btn-half-block" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+            </div>
+            <div class="modal-body">
+                
+                <!-- Descripcion de cada venta -->
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-bordered" id="dataTableProduct" width="100%" cellspacing="0">
+                            <thead class="table-info">
+                                <tr>
+                                    <th>Código</th>
+                                    <th>Producto</th>
+                                    <th>Cantidad</th>
+                                    <th>Precio Und</th>
+                                    <th>Precio Cnt</th>
+                                </tr>
+                            </thead>
+                            <tfoot>
+                                <tr>
+                                    <th></th>
+                                    <th></th>
+                                    <th class="table-warning">IVA - 16%</th>
+                                    <th class="table-success">SubTotal</th>
+                                    <th class="table-success">{{subtotal | currency}}</th>
+                                </tr>
+                                <tr>
+                                    <th></th>
+                                    <th></th>
+                                    <th class="table-warning">{{impuestos | currency}}</th>
+                                    <th class="table-dark">Total</th>
+                                    <th class="table-dark">{{total | currency}}</th>
+                                </tr>
+                            </tfoot>
+                            <tbody>
+                                <tr *ngFor="let item of lista_prd">
+                                    <td>{{item[0]}}</td>
+                                    <td>{{item[1]}}</td>
+                                    <td>{{item[2]}}</td>
+                                    <td>{{item[3] | currency}}</td>
+                                    <td>{{item[4] | currency}}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!--Modal devolución-->
+      <div class="modal fade" id="devolucion" tabindex="-1" aria-labelledby="descripcionLabel" style="display: none;" aria-hidden="true">
+        <div class="modal-dialog modal-lg pt-5">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h1 class="modal-title fs-3" id="descripcionLabel">Devolución de la factura N°{{id_temp}}.</h1>
+              <button type="button" class="btn btn-danger btn-close btn-half-block" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+            </div>
+            <div class="modal-body">
+                <h4 *ngIf="most_mess == true">{{mensaje}}</h4>
+                
+                <!-- Descripcion de cada venta -->
+                <div class="card-body" *ngIf="most_dev == true">
+                    <div class="table-responsive">
+                        <table class="table table-bordered" id="dataTableProduct" width="100%" cellspacing="0">
+                            <thead class="table-info">
+                                <tr>
+                                    <th>Código</th>
+                                    <th>Producto</th>
+                                    <th>Cantidad</th>
+                                    <th>Precio Und</th>
+                                    <th>Precio Cnt</th>
+                                </tr>
+                            </thead>
+                            <tfoot>
+                                <tr>
+                                    <th></th>
+                                    <th></th>
+                                    <th class="table-warning">IVA - 16%</th>
+                                    <th class="table-success">SubTotal</th>
+                                    <th class="table-success">{{subtotal | currency}}</th>
+                                </tr>
+                                <tr>
+                                    <th></th>
+                                    <th></th>
+                                    <th class="table-warning">{{impuestos | currency}}</th>
+                                    <th class="table-dark">Total</th>
+                                    <th class="table-dark">{{total | currency}}</th>
+                                </tr>
+                            </tfoot>
+                            <tbody>
+                                <tr *ngFor="let item of lista_prd">
+                                    <td>{{item[0]}}</td>
+                                    <td>{{item[1]}}</td>
+                                    <td>{{item[2]}}</td>
+                                    <td>{{item[3] | currency}}</td>
+                                    <td>{{item[4] | currency}}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+
 </div>

@@ -50,27 +50,27 @@ export class RegisterProvideerComponent {
     }else{
       this.validate_nit = true ;
     }
-    if(this.obj_proveedor.razon_social == ""){
+    if(this.obj_proveedor.razon_social == "" || this.obj_proveedor.razon_social == null){
       this.validate_razon = false ;
     }else{
       this.validate_razon = true ;
     }
-    if(this.obj_proveedor.contacto == ""){
+    if(this.obj_proveedor.contacto == "" || this.obj_proveedor.contacto == null){
       this.validate_cont = false ;
     }else{
       this.validate_cont = true ;
     }
-    if(this.obj_proveedor.telefono == ""){
+    if(this.obj_proveedor.telefono == "" || this.obj_proveedor.telefono == null){
       this.validate_tel = false ;
     }else{
       this.validate_tel = true ;
     }
-    if(this.obj_proveedor.correo == ""){
+    if(this.obj_proveedor.correo == "" || this.obj_proveedor.correo == null){
       this.validate_mail = false ;
     }else{
       this.validate_mail = true ;
     }
-    if(this.obj_proveedor.direccion == ""){
+    if(this.obj_proveedor.direccion == "" || this.obj_proveedor.direccion == null){
       this.validate_dir = false ;
     }else{
       this.validate_dir = true ;

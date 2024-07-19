@@ -115,6 +115,11 @@ export class CityComponent {
           text: "¡Este registro de ciudad ha sido eliminado!",
           icon: "success"
         });
+        this.scity.eliminar(id).subscribe((datos: any) => {
+          if(datos['resultado'] == 'OK'){
+            this.consulta() ;
+          }
+        }) ;
       } else if (
         /* Read more about handling dismissals below */
         result.dismiss === Swal.DismissReason.cancel
@@ -126,12 +131,5 @@ export class CityComponent {
         });
       }
     });
-
-    this.scity.eliminar(id).subscribe((datos: any) => 
-    {
-      if(datos['resultado'] == 'OK'){
-        this.consulta() ;
-      }
-    }) ;
   }
 }

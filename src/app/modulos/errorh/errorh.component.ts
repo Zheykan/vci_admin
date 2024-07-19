@@ -43,6 +43,11 @@ export class ErrorhComponent {
           text: "¡Este registro de error ha sido eliminado!",
           icon: "success"
         });
+        this.serrorh.eliminar(id).subscribe((datos: any) => {
+          if(datos['resultado'] == 'OK'){
+            this.consulta() ;
+          }
+        }) ;
       } else if (
         /* Read more about handling dismissals below */
         result.dismiss === Swal.DismissReason.cancel
@@ -54,12 +59,5 @@ export class ErrorhComponent {
         });
       }
     });
-
-    this.serrorh.eliminar(id).subscribe((datos: any) => 
-    {
-      if(datos['resultado'] == 'OK'){
-        this.consulta() ;
-      }
-    }) ;
   }
 }

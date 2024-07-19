@@ -61,7 +61,7 @@ export class RegisterProductComponent {
     }else{
       this.validate_cod = true ;
     }
-    if(this.obj_producto.nombre == ""){
+    if(this.obj_producto.nombre == "" || this.obj_producto.nombre == null){
       this.validate_name = false ;
     }else{
       this.validate_name = true ;

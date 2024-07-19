@@ -23,7 +23,7 @@
                                                     </svg>
                                                 </i>
                                                 VCI Admin 
-                                                <sup>0.0.7</sup>
+                                                <sup>0.0.8</sup>
                                             </div>
                                         </h5>
                                     </div>
@@ -35,12 +35,12 @@
                                             <input type="email" class="form-control form-control-user"
                                                 id="exampleInputEmail" aria-describedby="emailHelp"
                                                 placeholder="Ingresa tu dirección de Email..." [(ngModel)]="email" [ngModelOptions]="{standalone: true}">
-                                                <span class="span-alert" *ngIf="log_error == false">Inserte un Correo Valido.</span>
+                                                <span class="span-alert" *ngIf="log_error == false">Correo Invalido o Vacío.</span>
                                         </div>
                                         <div class="form-group">
                                             <input type="password" class="form-control form-control-user"
                                                 id="exampleInputPassword" placeholder="Ingresa tu contraseña..." [(ngModel)]="passwd" [ngModelOptions]="{standalone: true}">
-                                                <span class="span-alert" *ngIf="log_error == false">Inserte una contraseña valida.</span>
+                                                <span class="span-alert" *ngIf="log_error == false">Contraseña Invalida o Vacía.</span>
                                         </div>
                                         <div class="form-group">
                                             <div class="custom-control custom-checkbox small">
@@ -48,16 +48,13 @@
                                                 <label class="custom-control-label ps-2" for="customCheck">Recordar usuario</label>
                                             </div>
                                         </div>
-                                        <a class="btn btn-primary-alt btn-user btn-block" (click)="consulta('')">
+                                        <a class="btn btn-primary-alt btn-user btn-block" (click)="consulta()">
                                             Acceder</a>
                                     </form>
                                     <hr>
                                     <div class="text-center">
-                                        <a class="small" [routerLink]="['forgot-password']">Olvidaste tu Contraseña?</a>
+                                        <a class="small" [routerLink]="['/forgot-password']">Olvidaste tu Contraseña?</a>
                                     </div>
-                                    <!-- <div class="text-center">
-                                        <a class="small" [routerLink]="['register']">Crear Cuenta!</a>
-                                    </div> -->
                                 </div>
                             </div>
                         </div>

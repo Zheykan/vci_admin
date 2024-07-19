@@ -43,6 +43,11 @@ export class DepartmentComponent {
           text: "¡Este registro de departamento ha sido eliminado!",
           icon: "success"
         });
+        this.sdepartment.eliminar(id).subscribe((datos: any) => {
+          if(datos['resultado'] == 'OK'){
+            this.consulta() ;
+          }
+        }) ;
       } else if (
         /* Read more about handling dismissals below */
         result.dismiss === Swal.DismissReason.cancel
@@ -54,12 +59,5 @@ export class DepartmentComponent {
         });
       }
     });
-
-    this.sdepartment.eliminar(id).subscribe((datos: any) => 
-    {
-      if(datos['resultado'] == 'OK'){
-        this.consulta() ;
-      }
-    }) ;
   }
 }

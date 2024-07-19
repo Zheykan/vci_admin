@@ -28,11 +28,16 @@ import { MarkComponent } from './modulos/mark/mark.component';
 import { UnityComponent } from './modulos/unity/unity.component';
 import { ErrorhComponent } from './modulos/errorh/errorh.component';
 import { RegisterClientComponent } from './modulos/register-client/register-client.component';
+import { RegisterDevolutionComponent } from './modulos/register-devolution/register-devolution.component';
 import { RegisterProvideerComponent } from './modulos/register-provideer/register-provideer.component';
 import { RegisterPurchaseComponent } from './modulos/register-purchase/register-purchase.component';
 import { RegisterSaleComponent } from './modulos/register-sale/register-sale.component';
+import { ReportGeneralComponent } from './modulos/report-general/report-general.component';
+import { ReportPurchaseComponent } from './modulos/report-purchase/report-purchase.component';
+import { ReportSaleComponent } from './modulos/report-sale/report-sale.component';
 import { DepartmentComponent } from './modulos/department/department.component';
 import { HelpComponent } from './modulos/help/help.component';
+
 
 
 
@@ -63,9 +68,13 @@ import { HelpComponent } from './modulos/help/help.component';
     UnityComponent,
     ErrorhComponent,
     RegisterClientComponent,
+    RegisterDevolutionComponent,
     RegisterProvideerComponent,
     RegisterPurchaseComponent,
     RegisterSaleComponent,
+    ReportGeneralComponent,
+    ReportPurchaseComponent,
+    ReportSaleComponent,
     DepartmentComponent,
     HelpComponent
   ],

@@ -32,6 +32,7 @@ export class UserComponent {
   validate_rol = true ;
   validate_box = true ;
   most_edit = false ;
+  most_busq = false ;
 
   constructor(private suser: UsuarioService, private srole: RolService){}
   ngOnInit(): void{
@@ -60,6 +61,19 @@ export class UserComponent {
       break ;
     }
     this.limpiar() ;
+  }
+
+  mostrar_busq(dato: any){
+    switch(dato){
+      case "mostrar":
+        this.most_busq = true ;
+        this.most_edit = false ;
+      break ;
+      case "ocultar":
+        this.most_busq = false ;
+      break ;
+    }
+    this.dato = "" ;
   }
 
   limpiar(){
