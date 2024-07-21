@@ -6,7 +6,8 @@ import { Injectable } from '@angular/core';
 })
 export class DepartamentoService {
    // Si es necesario, cambiar en la url "Backend_vci_admin" por "Backend_VCI_Admin"
-   url = 'http://localhost/Backend_vci_admin/Controller/department.php';
+   //url = 'http://localhost/Backend_vci_admin/Controller/department.php';
+   url = 'http://www.vciadmingestor.whf.bz.mialias.net/Controller/department.php';
 
    constructor(private http: HttpClient) { }
  

@@ -45,7 +45,7 @@ export class LoginComponent {
           sessionStorage.setItem("rol",this.user[0]['rol']) ;
           sessionStorage.setItem("caja",this.user[0]['caja']) ;
           this.srouter.navigate(['dashboard']) ;
-          this.recarga() ;
+          //this.recarga() ;
           //for (let cont = 0; cont < 1; cont++) {
             //parent.window.location.reload();
           //}

@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 import { RolService } from '../../servicios/rol.service';
 import { UsuarioService } from '../../servicios/usuario.service';
 
@@ -27,11 +28,14 @@ export class RegisterComponent {
   validate_rol = true ;
   validate_box = true ;
 
-  constructor(private suser: UsuarioService, private srole: RolService){}
+  constructor(private suser: UsuarioService, private srole: RolService,
+    private srouter: Router){}
+    
   ngOnInit(): void{
     this.consulta() ;
     this.consulta_r() ;
   }
+
   consulta(){
     this.suser.consultar().subscribe((resultado: any) =>
     {this.usuario = resultado ;})
@@ -83,6 +87,7 @@ export class RegisterComponent {
       this.validate_rol == true){
         this.registrar_u() ;
         this.limpiar() ;
+        this.srouter.navigate(['user']) ;
     }
   }
 

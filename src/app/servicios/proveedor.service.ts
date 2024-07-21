@@ -6,7 +6,8 @@ import { Injectable } from '@angular/core';
 })
 export class ProveedorService {
   // Si es necesario, cambiar en la url "Backend_vci_admin" por "Backend_VCI_Admin"
-  url = 'http://localhost/Backend_vci_admin/Controller/provider.php';
+  //url = 'http://localhost/Backend_vci_admin/Controller/provider.php';
+  url = 'http://www.vciadmingestor.whf.bz.mialias.net/Controller/provider.php';
 
   constructor(private http: HttpClient) { }
 

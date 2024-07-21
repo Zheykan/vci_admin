@@ -6,7 +6,8 @@ import { Injectable } from '@angular/core';
 })
 export class DevolucionService {
   // Si es necesario, cambiar en la url "Backend_vci_admin" por "Backend_VCI_Admin"
-  url = 'http://localhost/Backend_vci_admin/Controller/devolution.php';
+  //url = 'http://localhost/Backend_vci_admin/Controller/devolution.php';
+  url = 'http://www.vciadmingestor.whf.bz.mialias.net/Controller/devolution.php';
 
   constructor(private http: HttpClient) { }
 

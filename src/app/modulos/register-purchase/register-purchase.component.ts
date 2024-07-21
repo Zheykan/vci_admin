@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 import { CompraService } from '../../servicios/compra.service';
 import { ProveedorService } from '../../servicios/proveedor.service';
 
@@ -38,7 +39,8 @@ export class RegisterPurchaseComponent {
   validate_precio = true ;
   validate_t = true ;
   
-  constructor(private spurch: CompraService, private sprovider: ProveedorService){}
+  constructor(private spurch: CompraService, private sprovider: ProveedorService,
+    private srouter: Router){}
   ngOnInit(): void{
     this.consulta() ;
     this.consulta_pv() ;
@@ -107,6 +109,7 @@ export class RegisterPurchaseComponent {
       this.validate_fecha == true && this.validate_t == true) {
         this.registrar_pch() ;
         this.limpiar() ;
+        this.srouter.navigate(['purchase']) ;
     }
   }
 

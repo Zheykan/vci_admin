@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 import { MarcaService } from '../../servicios/marca.service';
 import { ProductoService } from '../../servicios/producto.service';
 import { UnidadService } from '../../servicios/unidad.service';
@@ -24,6 +25,7 @@ export class RegisterProductComponent {
   }
   marca: any ;
   unidad: any ;
+  maximo : any ;
 
   validate_cod = true ;
   validate_name = true ;
@@ -35,24 +37,34 @@ export class RegisterProductComponent {
   validate_datev = true ;
 
   constructor(private sproduct: ProductoService, private smark: MarcaService, 
-  private sunit: UnidadService){}
+  private sunit: UnidadService, private srouter: Router){}
+
   ngOnInit(): void{
     this.consulta() ;
     this.consulta_m() ;
     this.consulta_u() ;
+    this.consulta_mx() ;
   }
   
   consulta(){
     this.sproduct.consultar().subscribe((resultado: any) =>
     {this.producto = resultado ;})
   }
+
   consulta_m(){
     this.smark.consultar().subscribe((resultado: any) =>
     {this.marca = resultado ;})
   }
+
   consulta_u(){
     this.sunit.consultar().subscribe((resultado: any) =>
     {this.unidad = resultado ;})
+  }
+
+  consulta_mx(){
+    this.sproduct.maximo().subscribe((resultado: any) => {
+      this.maximo = Number(resultado[0][0]) ;
+    }) ;
   }
 
   validar_info(){
@@ -101,6 +113,21 @@ export class RegisterProductComponent {
       this.validate_med == true && this.validate_und == true && 
       this.validate_price == true && this.validate_datev == true){
         this.registrar_p() ;
+        this.limpiar() ;
+        this.srouter.navigate(['product']) ;
+    }
+  }
+
+  limpiar(){
+    this.obj_producto = {
+      id_producto : 0 ,
+      nombre : "" ,
+      FO_marca : 0 ,
+      cantidad_producto : 0 ,
+      medida : 0 ,
+      FO_unidad : 0 ,
+      precio_venta : 0 ,
+      fecha_venc : 0
     }
   }
 

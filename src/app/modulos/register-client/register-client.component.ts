@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 import { ClienteService } from '../../servicios/cliente.service';
 
 @Component({
@@ -23,7 +24,7 @@ export class RegisterClientComponent {
   validate_mail = true ;
   validate_dir = true ;
 
-  constructor(private sclient: ClienteService){}
+  constructor(private sclient: ClienteService, private srouter: Router){}
   ngOnInit(): void{
     this.consulta() ;
   }
@@ -62,6 +63,18 @@ export class RegisterClientComponent {
       this.validate_tel == true && this.validate_mail == true && 
       this.validate_dir == true){
       this.registrar_c() ;
+      this.limpiar() ;
+      this.srouter.navigate(['client']) ;
+    }
+  }
+
+  limpiar(){
+    this.obj_cliente = {
+      id_cliente : 0 ,
+      nombre_apellido : "" ,
+      telefono: "" ,
+      correo: "" ,
+      domicilio: ""
     }
   }
 

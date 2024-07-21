@@ -6,7 +6,8 @@ import { Injectable } from '@angular/core';
 })
 export class ErrorhService {
   // Si es necesario, cambiar en la url "Backend_vci_admin" por "Backend_VCI_Admin"
-  url = 'http://localhost/Backend_vci_admin/Controller/errorh.php';
+  //url = 'http://localhost/Backend_vci_admin/Controller/errorh.php';
+  url = 'http://www.vciadmingestor.whf.bz.mialias.net/Controller/errorh.php';
 
   constructor(private http: HttpClient) { }
 

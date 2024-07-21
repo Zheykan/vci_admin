@@ -6,13 +6,18 @@ import { Injectable } from '@angular/core';
 })
 export class ProductoService {
   // Si es necesario, cambiar en la url "Backend_vci_admin" por "Backend_VCI_Admin"
-  url = 'http://localhost/Backend_vci_admin/Controller/product.php' ;
+  //url = 'http://localhost/Backend_vci_admin/Controller/product.php' ;
+  url = 'http://www.vciadmingestor.whf.bz.mialias.net/Controller/product.php' ;
 
   constructor(private http: HttpClient) {}
 
   consultar(){
     //console.log(`${this.url}?control=consulta`);
     return this.http.get(`${this.url}?control=consulta`) ;
+  }
+  maximo(){
+    //console.log(`${this.url}?control=consulta`);
+    return this.http.get(`${this.url}?control=maximo`) ;
   }
   insertar(params:any){
     //console.log(params);

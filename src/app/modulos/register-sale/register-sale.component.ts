@@ -29,6 +29,7 @@ export class RegisterSaleComponent {
   }
   lista_venta: any = [] ;
   detail_p: any = [] ;
+  articulos = 0 ;
   stock_g = 0 ;
   stock_p = 0 ;
   subtotal = 0 ;
@@ -174,6 +175,7 @@ export class RegisterSaleComponent {
         }
         this.limpiar() ;
         this.most_busq = false ;
+        this.srouter.navigate(['register-sale']) ;
     }
   }
 
@@ -191,17 +193,19 @@ export class RegisterSaleComponent {
   }
 
   seleccionar_prd(valores: any){
+    let articulos = 0 ;
+    articulos = articulos + this.stock_p ;
     //let cant_ing = Number(prompt("Cantidad requerida (no debe ser mayor a "+valores.cantidad_producto+"):")) ;
     // cargamos la matriz para actualizar la lista de venta en base de datos
     let detail_p = [valores.id_producto, valores.nombre+" "+valores.medida+" "+valores.unidad_med+" "+valores.marca,
     this.stock_p, Number(valores.precio_venta), this.stock_p * Number(valores.precio_venta)] ;
     // corroborar el almacenaje de la descripcion del producto dentro de la matriz
     this.lista_venta.push(detail_p) ;
-    console.log(this.lista_venta) ;
+    // console.log(this.lista_venta) ;
     // cargamos la matriz para actualizar cantidades en base de datos
     this.stock_g = this.stock_g - this.stock_p ;
-    this.detail_p = [valores.id_producto, this.stock_g];
-    this.new_cant.push(this.detail_p) ;
+    detail_p = [valores.id_producto, this.stock_g];
+    this.new_cant.push(detail_p) ;
     // calculamos el total segun los precios almacenados en la mareiz
     let size = this.lista_venta.length;
     this.total_v = 0 ;
@@ -209,11 +213,13 @@ export class RegisterSaleComponent {
       this.total_v += this.lista_venta[index][4] ;
       //console.log(this.total_v) ;
     }
+    this.articulos = this.articulos + articulos;
     this.impuestos = this.total_v * this.iva ;
     this.subtotal = this.total_v - this.impuestos ;
     this.obj_venta.productos_venta = this.lista_venta ;
     this.obj_venta.total = this.total_v ;
     //console.log(this.obj_venta) ;
+    console.log(this.articulos) ;
   }
 
   stock_save(){
@@ -224,7 +230,9 @@ export class RegisterSaleComponent {
   }
 
   quitar_prd(valores: any){
+    let articulos = 0 ;
     let idnc = this.lista_venta.indexOf(valores) ;
+    articulos = articulos + Number(this.lista_venta[idnc][2]) ;
     this.lista_venta.splice(idnc, 1) ;
     // corroborar la eliminación de la descripcion del producto dentro de la matriz
     //console.log(this.lista_venta) ;
@@ -234,11 +242,13 @@ export class RegisterSaleComponent {
       this.total_v += this.lista_venta[index][4] ;
       //console.log(this.total_v) ;
     }
+    this.articulos = this.articulos - articulos;
     this.impuestos = this.total_v * this.iva ;
     this.subtotal = this.total_v - this.impuestos ;
     this.obj_venta.productos_venta = this.lista_venta ;
     this.obj_venta.total = this.total_v ;
     //console.log(this.obj_venta) ;
+    console.log(this.articulos) ;
   }
 
   registrar_sl(){
@@ -420,7 +430,7 @@ export class RegisterSaleComponent {
           body: [
             [{text: 'Cajero: '+this.vendedor_n, style: 'clienteStyle'},
             {text: 'Caja: '+this.caja, style: 'fechaStyle'},
-            {text: 'Número de articulos entregados: '+this.obj_venta.productos_venta.length, style: 'fechaStyle'}],
+            {text: 'Número de articulos entregados: '+this.articulos, style: 'fechaStyle'}],
           ]
         },
         layout: 'noBorders'

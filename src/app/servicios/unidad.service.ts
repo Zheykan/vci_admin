@@ -6,7 +6,8 @@ import { Injectable } from '@angular/core';
 })
 export class UnidadService {
   // Si es necesario, cambiar en la url "Backend_vci_admin" por "Backend_VCI_Admin"
-  url = 'http://localhost/Backend_vci_admin/Controller/unity.php';
+  //url = 'http://localhost/Backend_vci_admin/Controller/unity.php';
+  url = 'http://www.vciadmingestor.whf.bz.mialias.net/Controller/unity.php';
 
   constructor(private http: HttpClient) { }
 

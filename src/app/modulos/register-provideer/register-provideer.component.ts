@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 import { CiudadService } from '../../servicios/ciudad.service';
 import { ProveedorService } from '../../servicios/proveedor.service';
 
@@ -29,7 +30,8 @@ export class RegisterProvideerComponent {
   validate_dir = true ;
   validate_city = true ;
 
-  constructor(private sprovider: ProveedorService, private scity: CiudadService){}
+  constructor(private sprovider: ProveedorService, private scity: CiudadService,
+    private srouter: Router){}
   ngOnInit(): void{
     this.consulta() ;
     this.consulta_c() ;
@@ -85,6 +87,20 @@ export class RegisterProvideerComponent {
       this.validate_mail == true && this.validate_dir == true && 
       this.validate_city == true) {
         this.registrar_pv() ;
+        this.limpiar() ;
+        this.srouter.navigate(['provider']) ;
+    }
+  }
+
+  limpiar(){
+    this.obj_proveedor = {
+      id_proveedor_nit : 0 ,
+      razon_social : "" ,
+      contacto : "" ,
+      telefono : "" ,
+      correo : "" ,
+      direccion: "" ,
+      FO_ciudad : 0
     }
   }
 

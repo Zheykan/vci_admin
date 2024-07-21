@@ -10,6 +10,7 @@
 //}
 
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 import { DevolucionService } from '../../servicios/devolucion.service';
 import { VentaService } from '../../servicios/venta.service';
 
@@ -58,7 +59,8 @@ export class RegisterDevolutionComponent {
   most_dev = false ;
   most_stock = false ;
 
-  constructor(private sdevol: DevolucionService, private ssale: VentaService){}
+  constructor(private sdevol: DevolucionService, private ssale: VentaService,
+    private srouter: Router){}
 
   ngOnInit(): void{
     this.consulta() ;
@@ -145,6 +147,7 @@ export class RegisterDevolutionComponent {
         this.registrar_dev() ;
         this.limpiar() ;
         this.most_busq = false ;
+        this.srouter.navigate(['devolution']) ;
     }
   }
 
